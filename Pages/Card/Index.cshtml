@@ -1,0 +1,36 @@
+﻿@page
+@model DHCardHelper.Pages.Card.IndexModel
+@{
+    ViewData["Title"] = "Card List";
+}
+
+<h1>Card List</h1>
+
+<table class="table table-hover">
+    <thead>
+        <tr class="table-dark">
+            <th>Domain</th>
+            <th>Title</th>
+            <th>Level</th>
+            <th>Type</th>
+            <th>RecallCost</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var card in Model.Cards.OrderBy(c => c.Level))
+        {
+            <tr class="table-light" data-bs-toggle="collapse" data-bs-target="#details-@card.Id" aria-expanded="false" aria-controls="details-@card.Id">
+                <td>@card.Domain</td>
+                <td>@card.Title</td>
+                <td>@card.Level</td>
+                <td>@card.Type</td>
+                <td>@card.RecallCost</td>
+            </tr>
+            <tr class="collapse" id="details-@card.Id">
+                <td colspan="3"> @* Megnézni ez mi *@
+                    @Html.Raw(card.Feature)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
