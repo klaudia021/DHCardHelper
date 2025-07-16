@@ -1,0 +1,42 @@
+[
+  {
+    "Level": 1,
+    "Domain": "Fire",
+    "RecallCost": 3,
+    "Title": "Flame Surge",
+    "Type": "Attack",
+    "Feature": "Deals fire damage to a target within range."
+  },
+  {
+    "Level": 3,
+    "Domain": "Fire",
+    "RecallCost": 4,
+    "Title": "Inferno",
+    "Type": "Attack",
+    "Feature": "Unleashes a wave of fire that damages all enemies in its path."
+  },
+  {
+    "Level": 1,
+    "Domain": "Fire",
+    "RecallCost": 1,
+    "Title": "Fireball",
+    "Type": "Attack",
+    "Feature": "Launches a small fireball that explodes on impact, dealing fire damage."
+  },
+  {
+    "Level": 4,
+    "Domain": "Fire",
+    "RecallCost": 5,
+    "Title": "Firestorm",
+    "Type": "Passive",
+    "Feature": "Unleashes a storm of fireballs that hit all enemies in the area."
+  },
+  {
+    "Level": 2,
+    "Domain": "Fire",
+    "RecallCost": 3,
+    "Title": "Ember Spark",
+    "Type": "Passive",
+    "Feature": "Deals a small amount of fire damage over time to enemies."
+  }
+]

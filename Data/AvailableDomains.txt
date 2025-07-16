@@ -1,0 +1,6 @@
+﻿Fire
+Water
+Air
+Earth
+Light
+Darkness

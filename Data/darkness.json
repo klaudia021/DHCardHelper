@@ -1,0 +1,42 @@
+[
+  {
+    "Level": 1,
+    "Domain": "Darkness",
+    "RecallCost": 2,
+    "Title": "Shadow Step",
+    "Type": "Attack",
+    "Feature": "Teleports the user a short distance, leaving behind a shadowy afterimage."
+  },
+  {
+    "Level": 4,
+    "Domain": "Darkness",
+    "RecallCost": 5,
+    "Title": "Eclipse",
+    "Type": "Attack",
+    "Feature": "Reduces enemy vision range and weakens their attacks."
+  },
+  {
+    "Level": 3,
+    "Domain": "Darkness",
+    "RecallCost": 4,
+    "Title": "Shadow Cloak",
+    "Type": "Passive",
+    "Feature": "Grants the user invisibility for a short period of time."
+  },
+  {
+    "Level": 2,
+    "Domain": "Darkness",
+    "RecallCost": 3,
+    "Title": "Dark Pulse",
+    "Type": "Attack",
+    "Feature": "Fires a pulse of dark energy that causes enemies to take damage and be weakened."
+  },
+  {
+    "Level": 5,
+    "Domain": "Darkness",
+    "RecallCost": 6,
+    "Title": "Nightmare",
+    "Type": "Passive",
+    "Feature": "Induces fear in enemies, causing them to flee from the user in panic."
+  }
+]

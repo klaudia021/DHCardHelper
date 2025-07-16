@@ -1,3 +1,5 @@
+using DHCardHelper.Services;
+
 namespace DHCardHelper
 {
     public class Program
@@ -7,6 +9,7 @@ namespace DHCardHelper
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddScoped<IMyLogger, ConsoleLogger>();
             builder.Services.AddRazorPages();
 
             var app = builder.Build();
