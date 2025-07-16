@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -12,6 +12,11 @@
 
   <ItemGroup>
     <None Include="Data\ClassesAndDomains.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DHCardHelper.Data\DHCardHelper.Data.csproj" />
+    <ProjectReference Include="..\DHCardHelper.Models\DHCardHelper.Models.csproj" />
   </ItemGroup>
 
 </Project>
