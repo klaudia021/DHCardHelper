@@ -10,10 +10,13 @@ namespace DHCardHelper.Pages.Card
     {
         public List<CardDto> Cards { get; set; } = new List<CardDto>();
         public List<CardDto> FilteredCards { get; set; } = new List<CardDto>();
+        public List<ClassDomainRelationDto> _classDomainRelations { get; set; } = new List<ClassDomainRelationDto>();
         public string[] _availableDomains { get; set; }
 
         [BindProperty]
-        public string SelectedItem { get; set; }
+        public string SelectedDomain { get; set; }
+        [BindProperty]
+        public string SelectedClass { get; set; }
 
         private readonly IMyLogger _logger;
         private readonly IWebHostEnvironment _env;
@@ -46,17 +49,45 @@ namespace DHCardHelper.Pages.Card
                     IdCounter++;
                 }
             }
+
+            _classDomainRelations = await ReadClassesAndDomainsFromJsonAsync();
+            _logger.Info($"Class:{_classDomainRelations[0].Class} \n Domains: {_classDomainRelations[0].Domains[0]} {_classDomainRelations[0].Domains[1]}");
         }
-        public async Task<IActionResult> OnPostSelectedDomain()
+        public async Task<IActionResult> OnPostFilterApplied(string SelectedClass, string SelectedDomain)
         {
             await LoadData();
 
-            if (SelectedItem == "All")
-                FilteredCards = Cards;
-            else
-                FilteredCards = FilteredCards.Where(c => c.Domain == SelectedItem).ToList();
+            _logger.Info($"SelectedClass: {SelectedClass}\n SelectedDomain: {SelectedDomain}");
+            if (SelectedClass != "All")
+            {
+                FilterClass();
+                return Page();
+            }
+
+            if (SelectedDomain != "All")
+            {
+                FilterDomain();
+                return Page();
+            }
 
             return Page();
+        }
+
+        private void FilterClass()
+        {
+            var selectedClass = _classDomainRelations.Find(c => c.Class == SelectedClass);
+            if (selectedClass != null)
+            {
+                FilteredCards = FilteredCards.Where(c => (c.Domain == selectedClass.Domains[0] || c.Domain == selectedClass.Domains[1])).ToList();
+            }
+        }
+
+        private void FilterDomain()
+        {
+            if (SelectedDomain == "All")
+                FilteredCards = Cards;
+            else
+                FilteredCards = FilteredCards.Where(c => c.Domain == SelectedDomain).ToList();
         }
         private async Task<string[]> ReadAvailableDomains()
         {
@@ -84,6 +115,22 @@ namespace DHCardHelper.Pages.Card
                 using var stream = System.IO.File.OpenRead(filePath);
 
                 return await JsonSerializer.DeserializeAsync<List<CardDto>>(stream);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex.Message);
+                throw new Exception(ex.Message);
+            }
+        }
+
+        private async Task<List<ClassDomainRelationDto>> ReadClassesAndDomainsFromJsonAsync()
+        {
+            try
+            {
+                var filePath = Path.Combine(_env.ContentRootPath, "Data", "ClassesAndDomains.json");
+                using var stream = System.IO.File.OpenRead(filePath);
+
+                return await JsonSerializer.DeserializeAsync<List<ClassDomainRelationDto>>(stream);
             }
             catch (Exception ex)
             {

@@ -1,0 +1,42 @@
+[
+  {
+    "Level": 2,
+    "Domain": "Earth",
+    "RecallCost": 3,
+    "Title": "Stonewall",
+    "Type": "Passive",
+    "Feature": "Creates a wall of stone that blocks incoming projectiles."
+  },
+  {
+    "Level": 3,
+    "Domain": "Earth",
+    "RecallCost": 4,
+    "Title": "Rock Shield",
+    "Type": "Passive",
+    "Feature": "Creates a barrier of stone that reduces damage taken."
+  },
+  {
+    "Level": 1,
+    "Domain": "Earth",
+    "RecallCost": 2,
+    "Title": "Mudslide",
+    "Type": "Passive",
+    "Feature": "Creates a mudslide that slows down and damages enemies."
+  },
+  {
+    "Level": 3,
+    "Domain": "Earth",
+    "RecallCost": 4,
+    "Title": "Stone Fist",
+    "Type": "Attack",
+    "Feature": "Deals earth damage with a powerful punch that stuns the target."
+  },
+  {
+    "Level": 3,
+    "Domain": "Earth",
+    "RecallCost": 4,
+    "Title": "Earthquake",
+    "Type": "Attack",
+    "Feature": "Shakes the ground, dealing damage and stunning enemies."
+  }
+]

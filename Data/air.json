@@ -1,0 +1,42 @@
+[
+  {
+    "Level": 1,
+    "Domain": "Air",
+    "RecallCost": 1,
+    "Title": "Wind Gust",
+    "Type": "Attack",
+    "Feature": "Pushes enemies away with a powerful gust of wind."
+  },
+  {
+    "Level": 4,
+    "Domain": "Air",
+    "RecallCost": 5,
+    "Title": "Whirlwind",
+    "Type": "Attack",
+    "Feature": "Summons a whirlwind that moves across the battlefield, pushing enemies away."
+  },
+  {
+    "Level": 2,
+    "Domain": "Air",
+    "RecallCost": 3,
+    "Title": "Updraft",
+    "Type": "Attack",
+    "Feature": "Generates an updraft that boosts movement speed and allows temporary flight."
+  },
+  {
+    "Level": 5,
+    "Domain": "Air",
+    "RecallCost": 6,
+    "Title": "Hurricane",
+    "Type": "Attack",
+    "Feature": "Summons a massive hurricane that devastates all enemies within its reach."
+  },
+  {
+    "Level": 1,
+    "Domain": "Air",
+    "RecallCost": 2,
+    "Title": "Gust",
+    "Type": "Attack",
+    "Feature": "Generates a strong gust of wind that knocks enemies back."
+  }
+]

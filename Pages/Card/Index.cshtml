@@ -7,11 +7,21 @@
 <h1>Card List</h1>
 
 <div class="container border mt-3 mb-3">
-    <form method="post" asp-page-handler="SelectedDomain">
+    <form method="post" asp-page-handler="FilterApplied">
         <div class="row mt-3 mb-2">
-            <label class="form-label" for="domainSelect">Domain</label>
             <div class="col-2">
-                <select class="form-select-sm" asp-for="SelectedItem" id="domainSelect" onchange="this.form.submit()">
+            <label class="form-label" for="classSelect">Class</label>
+                <select class="form-select-sm" asp-for="SelectedClass" id="classSelect" name="SelectedClass" onchange="this.form.submit()">
+                    <option value="All">All</option>
+                    @foreach (var classDomain in Model._classDomainRelations)
+                    {
+                        <option value="@classDomain.Class">@classDomain.Class</option>
+                    }
+                </select>
+            </div>
+            <div class="col-2">
+            <label class="form-label" for="domainSelect">Domain</label>
+                <select class="form-select-sm" asp-for="SelectedDomain" id="domainSelect" name="SelectedDomain" onchange="this.form.submit()">
                     <option value="All">All</option>
                     @foreach (var domain in Model._availableDomains)
                     {
@@ -21,7 +31,6 @@
             </div>
         </div>
     </form>
-
 </div>
 
 <table class="table table-hover">

@@ -1,0 +1,22 @@
+﻿[
+	{
+		"Class": "Earthkeeper",
+		"Domains": [ "Earth", "Water" ]
+	},
+	{
+		"Class": "Protector",
+		"Domains": [ "Air", "Fire" ]
+	},
+	{
+		"Class": "Huntsman",
+		"Domains": [ "Darkness", "Earth" ]
+	},
+	{
+		"Class": "Lightbringer",
+		"Domains": [ "Light", "Air" ]
+	},
+	{
+		"Class": "Battlemaster",
+		"Domains": [ "Fire", "Darkness" ]
+	}
+]

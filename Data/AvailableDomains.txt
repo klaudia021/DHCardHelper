@@ -1,2 +1,6 @@
-﻿Arcana
-Blade
+﻿Fire
+Water
+Air
+Earth
+Light
+Darkness

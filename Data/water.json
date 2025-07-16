@@ -1,0 +1,42 @@
+[
+  {
+    "Level": 2,
+    "Domain": "Water",
+    "RecallCost": 3,
+    "Title": "Aqua Shield",
+    "Type": "Passive",
+    "Feature": "Creates a shield of water that absorbs damage."
+  },
+  {
+    "Level": 3,
+    "Domain": "Water",
+    "RecallCost": 4,
+    "Title": "Tidal Surge",
+    "Type": "Attack",
+    "Feature": "Deals water damage to enemies in a large area around the caster."
+  },
+  {
+    "Level": 1,
+    "Domain": "Water",
+    "RecallCost": 2,
+    "Title": "Water Jet",
+    "Type": "Attack",
+    "Feature": "Shoots a high-pressure jet of water at an enemy, knocking them back."
+  },
+  {
+    "Level": 2,
+    "Domain": "Water",
+    "RecallCost": 3,
+    "Title": "Tidal Wave",
+    "Type": "Passive",
+    "Feature": "Summons a wave to push enemies back and deal water damage."
+  },
+  {
+    "Level": 3,
+    "Domain": "Water",
+    "RecallCost": 4,
+    "Title": "Frostbite",
+    "Type": "Attack",
+    "Feature": "Deals ice damage and slows the enemy for a short period."
+  }
+]

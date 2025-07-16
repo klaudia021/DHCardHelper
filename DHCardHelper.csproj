@@ -6,4 +6,12 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Remove="Data\ClassesAndDomains.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Data\ClassesAndDomains.json" />
+  </ItemGroup>
+
 </Project>

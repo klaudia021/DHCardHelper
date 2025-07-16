@@ -1,0 +1,42 @@
+[
+  {
+    "Level": 2,
+    "Domain": "Light",
+    "RecallCost": 3,
+    "Title": "Radiant Burst",
+    "Type": "Attack",
+    "Feature": "A burst of light that deals radiant damage to enemies in the area."
+  },
+  {
+    "Level": 1,
+    "Domain": "Light",
+    "RecallCost": 1,
+    "Title": "Sunbeam",
+    "Type": "Attack",
+    "Feature": "Deals radiant damage to a single target over time."
+  },
+  {
+    "Level": 4,
+    "Domain": "Light",
+    "RecallCost": 5,
+    "Title": "Blinding Flash",
+    "Type": "Passive",
+    "Feature": "Blinds enemies in the area, reducing their accuracy."
+  },
+  {
+    "Level": 3,
+    "Domain": "Light",
+    "RecallCost": 4,
+    "Title": "Blinding Ray",
+    "Type": "Passive",
+    "Feature": "Shoots a concentrated beam of light, causing blindness to enemies in its path."
+  },
+  {
+    "Level": 5,
+    "Domain": "Light",
+    "RecallCost": 6,
+    "Title": "Solar Flare",
+    "Type": "Passive",
+    "Feature": "Unleashes a devastating beam of light that burns all enemies in its radius."
+  }
+]
