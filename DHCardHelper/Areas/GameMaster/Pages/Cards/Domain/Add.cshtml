@@ -1,0 +1,29 @@
+﻿@page
+@model DHCardHelper.Areas.GameMaster.Pages.Cards.Domain.AddModel
+@{
+    ViewData["Title"] = "Add Card";
+}
+<div class="container mt-4">
+    <h1>Add Card</h1>
+    <div class="card">
+        <form method="post">
+            <div class="m-3">
+                <div class="row">
+                    <div class="col-6">
+                        <label>Domain</label>
+                        <select class="form-select">
+                            @foreach (var domain in Model._availableDomains)
+                            {
+                                <option value=@domain.Name>@domain.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-6">
+                        <label>Type</label>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
