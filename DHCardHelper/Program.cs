@@ -1,4 +1,8 @@
+using DHCardHelper.Data;
+using DHCardHelper.Data.Repository;
+using DHCardHelper.Data.Repository.IRepository;
 using DHCardHelper.Services;
+using Microsoft.EntityFrameworkCore;
 
 namespace DHCardHelper
 {
@@ -10,6 +14,9 @@ namespace DHCardHelper
 
             // Add services to the container.
             builder.Services.AddScoped<IMyLogger, ConsoleLogger>();
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
             builder.Services.AddRazorPages();
 
             var app = builder.Build();

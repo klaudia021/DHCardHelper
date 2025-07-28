@@ -1,5 +1,6 @@
-﻿@page
-@model DHCardHelper.Pages.Card.IndexModel
+﻿@page "card"
+@using DHCardHelper.Models.Cards
+@model DHCardHelper.Pages.Cards.Domains.IndexModel
 @{
     ViewData["Title"] = "Card List";
 }
@@ -13,10 +14,11 @@
             <label class="form-label" for="classSelect">Class</label>
                 <select class="form-select-sm" asp-for="SelectedClass" id="classSelect" name="SelectedClass" onchange="this.form.submit()">
                     <option value="All">All</option>
-                    @foreach (var classDomain in Model._classDomainRelations)
+                    <option value=""></option>
+                    @* @foreach (var classDomain in Model._classDomainRelations)
                     {
                         <option value="@classDomain.Class">@classDomain.Class</option>
-                    }
+                    } *@
                 </select>
             </div>
             <div class="col-2">
@@ -36,25 +38,15 @@
 <table class="table table-hover">
     <thead>
         <tr class="table-dark">
-            <th>Domain
-                <i class="bi bi-caret-up" id="domainOrder"></i>
-            </th>
-            <th>Title
-                <i class="bi bi-caret-up" id="TitleOrder"></i>
-            </th>
-            <th>Level
-                <i class="bi bi-caret-up" id="LevelOrder"></i>
-                </th>
-            <th>Type
-                <i class="bi bi-caret-up" id="TypeOrder"></i>
-                </th>
-            <th>RecallCost
-                <i class="bi bi-caret-up" id="RecallCostOrder"></i>
-            </th>
+            <th>Domain<i class="bi bi-caret-up" id="domainOrder"></i></th>
+            <th>Title<i class="bi bi-caret-up" id="TitleOrder"></i></th>
+            <th>Level<i class="bi bi-caret-up" id="LevelOrder"></i></th>
+            <th>Type<i class="bi bi-caret-up" id="TypeOrder"></i></th>
+            <th>RecallCost<i class="bi bi-caret-up" id="RecallCostOrder"></i></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var card in Model.FilteredCards.OrderBy(c => c.Level))
+        @foreach (var card in Model._filteredCards.OrderBy(c => c.Type))
         {
             <tr class="table-light" data-bs-toggle="collapse" data-bs-target="#details-@card.Id" aria-expanded="false" aria-controls="details-@card.Id">
                 <td>@card.Domain</td>
