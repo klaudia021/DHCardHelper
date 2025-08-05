@@ -6,16 +6,17 @@ using DHCardHelper.Services;
 using DHCardHelper.Data.Repository.IRepository;
 using DomainModel = DHCardHelper.Models.Cards.DomainCard;
 using DHCardHelper.Models.Cards;
+using DHCardHelper.Utilities.SeedDatabase;
+using Microsoft.IdentityModel.Tokens;
 
 namespace DHCardHelper.Pages.Cards.Domains
 {
     public class IndexModel : PageModel
     {
-        public IEnumerable<DomainModel> _domainCards { get; set; } = new List<DomainModel>();
+        public IEnumerable<DomainModel> DomainCards { get; set; } = new List<DomainModel>();
 
-        public IEnumerable<DomainModel> _filteredCards { get; set; } = new List<DomainModel>();
-        //public List<ClassDomainRelationDto> _classDomainRelations { get; set; } = new List<ClassDomainRelationDto>();
-        public IEnumerable<string> _availableDomains { get; set; }
+        public IEnumerable<DomainModel> FilteredCards { get; set; } = new List<DomainModel>();
+        public IEnumerable<string> AvailableDomains { get; set; }
 
         [BindProperty]
         public string SelectedDomain { get; set; }
@@ -32,15 +33,29 @@ namespace DHCardHelper.Pages.Cards.Domains
         }
         public async Task OnGet()
         {
-            await LoadAllDataAsync();
+            try
+            {
+                var allCards = await _unitOfWork.CardRepository.GetAllAsync();
+
+                if (allCards.IsNullOrEmpty())
+                {
+                    await DatabaseSeeder.SeedDatabaseAsync(_unitOfWork);
+                }
+                
+                await LoadAllDataAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex.Message);
+            }
         }
 
         private async Task LoadAllDataAsync()
         {
-            _domainCards = await _unitOfWork.CardRepository.GetAllByTypeAsync<DomainModel>();
-            _filteredCards = _domainCards;
+            DomainCards = await _unitOfWork.CardRepository.GetAllByTypeAsync<DomainModel>();
+            FilteredCards = DomainCards;
 
-            _availableDomains = _domainCards
+            AvailableDomains = DomainCards
                 .Select(c => c.Domain)
                 .Distinct();
         }
@@ -69,7 +84,7 @@ namespace DHCardHelper.Pages.Cards.Domains
             //var selectedClass = _classDomainRelations.Find(c => c.Class == SelectedClass);
             //if (selectedClass != null)
             //{
-            //    _filteredCards = _filteredCards.Where(c => (c.Domain == selectedClass.Domains[0] || c.Domain == selectedClass.Domains[1])).ToList();
+            //    FilteredCards = FilteredCards.Where(c => (c.Domain == selectedClass.Domains[0] || c.Domain == selectedClass.Domains[1])).ToList();
             //}
         }
 
@@ -78,9 +93,9 @@ namespace DHCardHelper.Pages.Cards.Domains
             var domainCards = await _unitOfWork.CardRepository.GetAllByTypeAsync<DomainModel>();
 
             if (SelectedDomain == "All")
-                _filteredCards = domainCards;
+                FilteredCards = domainCards;
             else
-                _filteredCards = domainCards.Where(c => c.Domain == SelectedDomain);
+                FilteredCards = domainCards.Where(c => c.Domain == SelectedDomain);
         }
     }
 }

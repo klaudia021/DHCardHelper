@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DHCardHelper.Models", "DHCa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DHCardHelper", "DHCardHelper\DHCardHelper.csproj", "{6EBD18C1-886E-6F4D-71BF-E6A87E63916C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DHCardHelper.Utilities", "DHCardHelper.Utilities\DHCardHelper.Utilities.csproj", "{007E8C58-7E43-446B-94A3-CEA2F58CB519}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{6EBD18C1-886E-6F4D-71BF-E6A87E63916C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6EBD18C1-886E-6F4D-71BF-E6A87E63916C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6EBD18C1-886E-6F4D-71BF-E6A87E63916C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{007E8C58-7E43-446B-94A3-CEA2F58CB519}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{007E8C58-7E43-446B-94A3-CEA2F58CB519}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{007E8C58-7E43-446B-94A3-CEA2F58CB519}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{007E8C58-7E43-446B-94A3-CEA2F58CB519}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

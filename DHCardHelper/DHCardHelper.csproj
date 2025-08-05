@@ -7,14 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Data\ClassesAndDomains.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Data\ClassesAndDomains.json" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.7">
@@ -27,6 +19,7 @@
   <ItemGroup>
     <ProjectReference Include="..\DHCardHelper.Data\DHCardHelper.Data.csproj" />
     <ProjectReference Include="..\DHCardHelper.Models\DHCardHelper.Models.csproj" />
+    <ProjectReference Include="..\DHCardHelper.Utilities\DHCardHelper.Utilities.csproj" />
   </ItemGroup>
 
 </Project>
