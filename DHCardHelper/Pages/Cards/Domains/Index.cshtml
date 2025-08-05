@@ -1,0 +1,69 @@
+﻿@page "card"
+@using DHCardHelper.Models.Cards
+@model DHCardHelper.Pages.Cards.Domains.IndexModel
+@{
+    ViewData["Title"] = "Card List";
+}
+
+<h1>Card List</h1>
+
+<div class="container border mt-3 mb-3">
+    <form method="post" asp-page-handler="FilterApplied">
+        <div class="row mt-3 mb-2">
+            <div class="col-2">
+            <label class="form-label" for="classSelect">Class</label>
+                <select class="form-select-sm" asp-for="SelectedClass" id="classSelect" name="SelectedClass" onchange="this.form.submit()">
+                    <option value="All">All</option>
+                    <option value=""></option>
+                    @* @foreach (var classDomain in Model._classDomainRelations)
+                    {
+                        <option value="@classDomain.Class">@classDomain.Class</option>
+                    } *@
+                </select>
+            </div>
+            <div class="col-2">
+            <label class="form-label" for="domainSelect">Domain</label>
+                <select class="form-select-sm" asp-for="SelectedDomain" id="domainSelect" name="SelectedDomain" onchange="this.form.submit()">
+                    <option value="All">All</option>
+                    @foreach (var domain in Model.AvailableDomains)
+                    {
+                        <option value="@domain">@domain</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </form>
+</div>
+
+<table class="table table-hover">
+    <thead>
+        <tr class="table-dark">
+            <th>Domain<i class="bi bi-caret-up" id="domainOrder"></i></th>
+            <th>Title<i class="bi bi-caret-up" id="TitleOrder"></i></th>
+            <th>Level<i class="bi bi-caret-up" id="LevelOrder"></i></th>
+            <th>Type<i class="bi bi-caret-up" id="TypeOrder"></i></th>
+            <th>RecallCost<i class="bi bi-caret-up" id="RecallCostOrder"></i></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var card in Model.FilteredCards.OrderBy(c => c.Type))
+        {
+            <tr class="table-light" data-bs-toggle="collapse" data-bs-target="#details-@card.Id" aria-expanded="false" aria-controls="details-@card.Id">
+                <td>@card.Domain</td>
+                <td>@card.Title</td>
+                <td>@card.Level</td>
+                <td>@card.Type</td>
+                <td>@card.RecallCost</td>
+            </tr>
+            <tr>
+                <td colspan="5" class="hiddenRow">
+                    <div class="collapse" id="details-@card.Id">
+                        <div class="pt-2 pb-2">
+                            @Html.Raw(card.Feature)
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
