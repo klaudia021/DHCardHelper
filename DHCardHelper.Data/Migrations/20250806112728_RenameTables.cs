@@ -1,5 +1,4 @@
-﻿using DHCardHelper.Models.Cards;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 

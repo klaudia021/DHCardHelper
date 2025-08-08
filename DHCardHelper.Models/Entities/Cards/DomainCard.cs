@@ -1,4 +1,4 @@
-﻿using DHCardHelper.Models.Entities.AvailableTypes;
+﻿using DHCardHelper.Models.Entities;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -21,7 +21,7 @@ namespace DHCardHelper.Models.Entities.Cards
 
         [ForeignKey("TypeId")]
         [ValidateNever]
-        public AvailableTypes.Type Type { get; set; }
+        public Entities.Type Type { get; set; }
 
         [Range(0,20)]
         [Required]
