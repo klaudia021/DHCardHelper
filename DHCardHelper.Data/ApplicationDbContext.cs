@@ -4,15 +4,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DHCardHelper.Models.Cards;
-using DHCardHelper.Models.Domains;
+using DHCardHelper.Models.Entities;
+using DHCardHelper.Models.Entities.Cards;
 
 namespace DHCardHelper.Data
 {
     public class ApplicationDbContext : DbContext
     {
-        public DbSet<Card> _cards { get; set; }
-        public DbSet<AvailableDomain> _domains { get; set; }
+        public DbSet<Card> Cards { get; set; }
+        public DbSet<Domain> Domains { get; set; }
+        public DbSet<Models.Entities.Type> Types { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
@@ -26,7 +27,8 @@ namespace DHCardHelper.Data
                 .HasValue<DomainCard>("Domain")
                 .HasValue<SubclassCard>("Subclass");
 
-            modelBuilder.Entity<AvailableDomain>();
+            modelBuilder.Entity<Domain>();
+            modelBuilder.Entity<Models.Entities.Type>();
 
             base.OnModelCreating(modelBuilder);
         }

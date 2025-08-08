@@ -1,24 +1,21 @@
 ﻿@page "card"
 @using DHCardHelper.Models.Cards
 @model DHCardHelper.Pages.Cards.Domains.IndexModel
-@{
-    ViewData["Title"] = "Card List";
-}
 
-<h1>Card List</h1>
+<h1>Domain Cards</h1>
 
 <div class="container border mt-3 mb-3">
-    <form method="post" asp-page-handler="FilterApplied">
+    @* <form method="post" asp-page-handler="FilterApplied">
         <div class="row mt-3 mb-2">
             <div class="col-2">
             <label class="form-label" for="classSelect">Class</label>
                 <select class="form-select-sm" asp-for="SelectedClass" id="classSelect" name="SelectedClass" onchange="this.form.submit()">
                     <option value="All">All</option>
                     <option value=""></option>
-                    @* @foreach (var classDomain in Model._classDomainRelations)
+                    @foreach (var classDomain in Model._classDomainRelations)
                     {
                         <option value="@classDomain.Class">@classDomain.Class</option>
-                    } *@
+                    }
                 </select>
             </div>
             <div class="col-2">
@@ -32,7 +29,7 @@
                 </select>
             </div>
         </div>
-    </form>
+    </form> *@
 </div>
 
 <table class="table table-hover">
@@ -49,10 +46,10 @@
         @foreach (var card in Model.FilteredCards.OrderBy(c => c.Type))
         {
             <tr class="table-light" data-bs-toggle="collapse" data-bs-target="#details-@card.Id" aria-expanded="false" aria-controls="details-@card.Id">
-                <td>@card.Domain</td>
+                <td>@card.Domain.Name</td>
                 <td>@card.Title</td>
                 <td>@card.Level</td>
-                <td>@card.Type</td>
+                <td>@card.Type.Name</td>
                 <td>@card.RecallCost</td>
             </tr>
             <tr>

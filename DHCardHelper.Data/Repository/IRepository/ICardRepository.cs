@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DHCardHelper.Models.Cards;
+using DHCardHelper.Models.Entities.Cards;
 
 namespace DHCardHelper.Data.Repository.IRepository
 {

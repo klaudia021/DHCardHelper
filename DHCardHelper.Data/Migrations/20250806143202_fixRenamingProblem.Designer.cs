@@ -3,6 +3,7 @@ using DHCardHelper.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DHCardHelper.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250806143202_fixRenamingProblem")]
+    partial class fixRenamingProblem
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,7 +24,7 @@ namespace DHCardHelper.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("DHCardHelper.Models.AvailableTypes.Domain", b =>
+            modelBuilder.Entity("DHCardHelper.Models.AvailableTypes.AvailableDomain", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -74,8 +77,7 @@ namespace DHCardHelper.Data.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -101,8 +103,9 @@ namespace DHCardHelper.Data.Migrations
                 {
                     b.HasBaseType("DHCardHelper.Models.Cards.Card");
 
-                    b.Property<int>("DomainId")
-                        .HasColumnType("int");
+                    b.Property<string>("Domain")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Level")
                         .HasColumnType("int");
@@ -110,12 +113,9 @@ namespace DHCardHelper.Data.Migrations
                     b.Property<int>("RecallCost")
                         .HasColumnType("int");
 
-                    b.Property<int>("TypeId")
-                        .HasColumnType("int");
-
-                    b.HasIndex("DomainId");
-
-                    b.HasIndex("TypeId");
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("Domain");
                 });
@@ -129,25 +129,6 @@ namespace DHCardHelper.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("Subclass");
-                });
-
-            modelBuilder.Entity("DHCardHelper.Models.Cards.DomainCard", b =>
-                {
-                    b.HasOne("DHCardHelper.Models.AvailableTypes.Domain", "Domain")
-                        .WithMany()
-                        .HasForeignKey("DomainId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DHCardHelper.Models.AvailableTypes.Type", "Type")
-                        .WithMany()
-                        .HasForeignKey("TypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Domain");
-
-                    b.Navigation("Type");
                 });
 #pragma warning restore 612, 618
         }

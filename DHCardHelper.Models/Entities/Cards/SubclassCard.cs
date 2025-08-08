@@ -5,12 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DHCardHelper.Models.Domains
+namespace DHCardHelper.Models.Entities.Cards
 {
-    public class AvailableDomain
+    public class SubclassCard : Card
     {
-        [Key]
-        public int Id { get; set; }
-        public string Name { get; set; }
+        [Required]
+        public string MasteryType { get; set; }
     }
 }

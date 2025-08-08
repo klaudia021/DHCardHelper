@@ -1,5 +1,5 @@
 ﻿using DHCardHelper.Data.Repository.IRepository;
-using DHCardHelper.Models.Cards;
+using DHCardHelper.Models.Entities.Cards;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,7 +12,6 @@ namespace DHCardHelper.Data.Repository
     public class CardRepository : Repository<Card>, ICardRepository
     {
         private readonly ApplicationDbContext _db;
-
         public CardRepository(ApplicationDbContext db)
             : base(db)
         {

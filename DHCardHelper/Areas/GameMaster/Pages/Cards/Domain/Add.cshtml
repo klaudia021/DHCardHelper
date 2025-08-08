@@ -1,29 +1,73 @@
 ﻿@page
 @model DHCardHelper.Areas.GameMaster.Pages.Cards.Domain.AddModel
-@{
-    ViewData["Title"] = "Add Card";
-}
-<div class="container mt-4">
-    <h1>Add Card</h1>
-    <div class="card">
-        <form method="post">
-            <div class="m-3">
-                <div class="row">
-                    <div class="col-6">
-                        <label>Domain</label>
-                        <select class="form-select">
-                            @foreach (var domain in Model._availableDomains)
-                            {
-                                <option value=@domain.Name>@domain.Name</option>
-                            }
-                        </select>
+
+<div class="container">
+    <div class="card shadow border-0 my-4">
+        <div class="card-header text-center bg-light m-lg-0">
+            <h1>Add Domain</h1>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                <div class="row gy-3 mx-lg-3 my-lg-3">
+                    <div class="col-12 col-lg-3">
+                        <div class="form-floating">
+                            <select asp-for="DomainViewModel.DomainCard.DomainId" asp-items="Model.DomainViewModel.AvailableDomains" class="form-select"></select>
+                            <label>Domain</label>
+                        </div>
                     </div>
-                    <div class="col-6">
-                        <label>Type</label>
+                    <div class="col-12 col-lg-3">
+                        <div class="form-floating">
+                            <select asp-for="DomainViewModel.DomainCard.TypeId" asp-items="Model.DomainViewModel.AvailableTypes" class="form-select"></select>
+                            <label>Type</label>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-3">
+                        <div class="form-floating">
+                            <input asp-for="DomainViewModel.DomainCard.Level" class="form-control" />
+                            <label asp-for="DomainViewModel.DomainCard.Level"></label>
+                            <span asp-validation-for="DomainViewModel.DomainCard.Level" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-3">
+                        <div class="form-floating">
+                            <input asp-for="DomainViewModel.DomainCard.RecallCost" class="form-control" />
+                            <label asp-for="DomainViewModel.DomainCard.RecallCost"></label>
+                            <span asp-validation-for="DomainViewModel.DomainCard.RecallCost" class="text-danger"></span>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </form>
-
+                <div class="row mx-lg-3 my-3">
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <input asp-for="DomainViewModel.DomainCard.Title" class="form-control" />
+                            <label asp-for="DomainViewModel.DomainCard.Title"></label>
+                            <span asp-validation-for="DomainViewModel.DomainCard.Title" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mx-lg-3 my-3">
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <textarea asp-for="DomainViewModel.DomainCard.Feature" class="form-control" style="height:200px"></textarea>
+                            <label asp-for="DomainViewModel.DomainCard.Feature"></label>
+                            <span asp-validation-for="DomainViewModel.DomainCard.Feature" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row gy-3 mx-lg-3 my-lg-3">
+                    <div class="col-0 col-md-10"></div>
+                    <div class="col-12 col-md-2 text-end">
+                        <button class="btn btn-dark btn-sm w-100" type="submit">Add</button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
+
+@section Scripts
+{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
