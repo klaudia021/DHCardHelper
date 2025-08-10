@@ -1,5 +1,4 @@
-﻿@page "card"
-@using DHCardHelper.Models.Entities.Cards
+﻿@page
 @model DHCardHelper.Pages.Cards.Domains.IndexModel
 
 <h1>Domain Cards</h1>
@@ -30,37 +29,38 @@
             </div>
         </div>
     </form> *@
-</div>
 
-<table class="table table-hover">
-    <thead>
-        <tr class="table-dark">
-            <th>Domain<i class="bi bi-caret-up" id="domainOrder"></i></th>
-            <th>Title<i class="bi bi-caret-up" id="TitleOrder"></i></th>
-            <th>Level<i class="bi bi-caret-up" id="LevelOrder"></i></th>
-            <th>Type<i class="bi bi-caret-up" id="TypeOrder"></i></th>
-            <th>RecallCost<i class="bi bi-caret-up" id="RecallCostOrder"></i></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var card in Model.FilteredCards.OrderBy(c => c.Type))
-        {
-            <tr class="table-light" data-bs-toggle="collapse" data-bs-target="#details-@card.Id" aria-expanded="false" aria-controls="details-@card.Id">
-                <td>@card.Domain.Name</td>
-                <td>@card.Title</td>
-                <td>@card.Level</td>
-                <td>@card.Type.Name</td>
-                <td>@card.RecallCost</td>
+
+    <table class="table table-hover">
+        <thead>
+            <tr class="table-dark">
+                <th>Domain<i class="bi bi-caret-up" id="domainOrder"></i></th>
+                <th>Title<i class="bi bi-caret-up" id="TitleOrder"></i></th>
+                <th>Level<i class="bi bi-caret-up" id="LevelOrder"></i></th>
+                <th>Type<i class="bi bi-caret-up" id="TypeOrder"></i></th>
+                <th>RecallCost<i class="bi bi-caret-up" id="RecallCostOrder"></i></th>
             </tr>
-            <tr>
-                <td colspan="5" class="hiddenRow">
-                    <div class="collapse" id="details-@card.Id">
-                        <div class="pt-2 pb-2">
-                            @Html.Raw(card.Feature)
+        </thead>
+        <tbody>
+            @foreach (var card in Model.FilteredCards.OrderBy(c => c.Type))
+            {
+                <tr class="table-light" data-bs-toggle="collapse" data-bs-target="#details-@card.Id" aria-expanded="false" aria-controls="details-@card.Id">
+                    <td>@card.Domain.Name</td>
+                    <td>@card.Title</td>
+                    <td>@card.Level</td>
+                    <td>@card.Type.Name</td>
+                    <td>@card.RecallCost</td>
+                </tr>
+                <tr>
+                    <td colspan="5" class="hiddenRow">
+                        <div class="collapse" id="details-@card.Id">
+                            <div class="pt-2 pb-2">
+                                @Html.Raw(card.Feature)
+                            </div>
                         </div>
-                    </div>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

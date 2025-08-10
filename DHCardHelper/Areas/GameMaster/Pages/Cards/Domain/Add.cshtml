@@ -11,46 +11,46 @@
                 <div class="row gy-3 mx-lg-3 my-lg-3">
                     <div class="col-12 col-lg-3">
                         <div class="form-floating">
-                            <select asp-for="DomainViewModel.DomainCard.DomainId" asp-items="Model.DomainViewModel.AvailableDomains" class="form-select"></select>
+                            <select asp-for="DomainViewModel.DomainCardDto.DomainId" asp-items="Model.DomainViewModel.AvailableDomains" class="form-select"></select>
                             <label>Domain</label>
                         </div>
                     </div>
                     <div class="col-12 col-lg-3">
                         <div class="form-floating">
-                            <select asp-for="DomainViewModel.DomainCard.TypeId" asp-items="Model.DomainViewModel.AvailableTypes" class="form-select"></select>
+                            <select asp-for="DomainViewModel.DomainCardDto.TypeId" asp-items="Model.DomainViewModel.AvailableTypes" class="form-select"></select>
                             <label>Type</label>
                         </div>
                     </div>
                     <div class="col-12 col-lg-3">
                         <div class="form-floating">
-                            <input asp-for="DomainViewModel.DomainCard.Level" class="form-control" />
-                            <label asp-for="DomainViewModel.DomainCard.Level"></label>
-                            <span asp-validation-for="DomainViewModel.DomainCard.Level" class="text-danger"></span>
+                            <input asp-for="DomainViewModel.DomainCardDto.Level" class="form-control" />
+                            <label asp-for="DomainViewModel.DomainCardDto.Level"></label>
+                            <span asp-validation-for="DomainViewModel.DomainCardDto.Level" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col-12 col-lg-3">
                         <div class="form-floating">
-                            <input asp-for="DomainViewModel.DomainCard.RecallCost" class="form-control" />
-                            <label asp-for="DomainViewModel.DomainCard.RecallCost"></label>
-                            <span asp-validation-for="DomainViewModel.DomainCard.RecallCost" class="text-danger"></span>
+                            <input asp-for="DomainViewModel.DomainCardDto.RecallCost" class="form-control" />
+                            <label asp-for="DomainViewModel.DomainCardDto.RecallCost"></label>
+                            <span asp-validation-for="DomainViewModel.DomainCardDto.RecallCost" class="text-danger"></span>
                         </div>
                     </div>
                 </div>
                 <div class="row mx-lg-3 my-3">
                     <div class="col-12">
                         <div class="form-floating">
-                            <input asp-for="DomainViewModel.DomainCard.Title" class="form-control" />
-                            <label asp-for="DomainViewModel.DomainCard.Title"></label>
-                            <span asp-validation-for="DomainViewModel.DomainCard.Title" class="text-danger"></span>
+                            <input asp-for="DomainViewModel.DomainCardDto.Title" class="form-control" />
+                            <label asp-for="DomainViewModel.DomainCardDto.Title"></label>
+                            <span asp-validation-for="DomainViewModel.DomainCardDto.Title" class="text-danger"></span>
                         </div>
                     </div>
                 </div>
                 <div class="row mx-lg-3 my-3">
                     <div class="col-12">
                         <div class="form-floating">
-                            <textarea asp-for="DomainViewModel.DomainCard.Feature" class="form-control" style="height:200px"></textarea>
-                            <label asp-for="DomainViewModel.DomainCard.Feature"></label>
-                            <span asp-validation-for="DomainViewModel.DomainCard.Feature" class="text-danger"></span>
+                            <textarea asp-for="DomainViewModel.DomainCardDto.Feature" class="form-control" style="height:200px"></textarea>
+                            <label asp-for="DomainViewModel.DomainCardDto.Feature"></label>
+                            <span asp-validation-for="DomainViewModel.DomainCardDto.Feature" class="text-danger"></span>
                         </div>
                     </div>
                 </div>

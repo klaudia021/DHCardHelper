@@ -1,6 +1,8 @@
 using DHCardHelper.Data.Repository.IRepository;
+using DHCardHelper.Models.Entities.Cards;
 using DHCardHelper.Models.ViewModels;
 using DHCardHelper.Services;
+using MapsterMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -13,10 +15,12 @@ namespace DHCardHelper.Areas.GameMaster.Pages.Cards.Domain
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMyLogger _logger;
-        public AddModel(IUnitOfWork unitOfWork, IMyLogger logger)
+        private readonly IMapper _mapper;
+        public AddModel(IUnitOfWork unitOfWork, IMapper mapper, IMyLogger logger)
         {
             _unitOfWork = unitOfWork;
             _logger = logger;
+            _mapper = mapper;
         }
 
         [BindProperty]
@@ -31,12 +35,24 @@ namespace DHCardHelper.Areas.GameMaster.Pages.Cards.Domain
             await PopulateDropDowns();
 
             if (!ModelState.IsValid)
+                return Page();
+
+            var domainForeignKeyValid = await _unitOfWork.DomainRepository.AnyAsync(d => d.Id == DomainViewModel.DomainCardDto.DomainId);
+            if (!domainForeignKeyValid)
             {
-                TempData["Error"] = "The submitted data is not valid!";
+                ModelState.AddModelError("DomainViewModel.DomainCardDto.DomainId", "Invalid domain selected.");
                 return Page();
             }
 
-            await _unitOfWork.CardRepository.AddAsync(DomainViewModel.DomainCard);
+            var typeForeignKeyValid = await _unitOfWork.TypeRepository.AnyAsync(t => t.Id == DomainViewModel.DomainCardDto.TypeId);
+            if (!typeForeignKeyValid)
+            {
+                ModelState.AddModelError("DomainViewModel.DomainCardDto.TypeId", "Invalid type selected.");
+                return Page();
+            }
+
+            DomainCard newEntity = _mapper.Map<DomainCard>(DomainViewModel.DomainCardDto);
+            await _unitOfWork.CardRepository.AddAsync(newEntity);
             await _unitOfWork.SaveAsync();
 
             TempData["Success"] = "Domain card added successfully!";
