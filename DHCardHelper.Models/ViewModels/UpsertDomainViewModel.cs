@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace DHCardHelper.Models.ViewModels
 {
-    public class CreateDomainViewModel
+    public class UpsertDomainViewModel
     {
         public DomainCard DomainCard { get; set; }
 
