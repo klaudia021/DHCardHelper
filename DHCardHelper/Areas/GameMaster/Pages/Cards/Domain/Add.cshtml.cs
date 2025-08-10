@@ -20,7 +20,7 @@ namespace DHCardHelper.Areas.GameMaster.Pages.Cards.Domain
         }
 
         [BindProperty]
-        public CreateDomainViewModel DomainViewModel { get; set; } = new CreateDomainViewModel();
+        public UpsertDomainViewModel DomainViewModel { get; set; } = new UpsertDomainViewModel();
 
         public async Task OnGet()
         {
