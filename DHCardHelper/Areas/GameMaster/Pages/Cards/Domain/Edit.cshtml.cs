@@ -1,7 +1,9 @@
 using DHCardHelper.Data.Repository.IRepository;
+using DHCardHelper.Models.DTOs;
 using DHCardHelper.Models.Entities.Cards;
 using DHCardHelper.Models.ViewModels;
 using DHCardHelper.Services;
+using MapsterMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -13,24 +15,26 @@ namespace DHCardHelper.Areas.GameMaster.Pages.Cards.Domain
     {
         private readonly IMyLogger _logger;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
         [BindProperty]
         public UpsertDomainViewModel DomainViewModel { get; set; } = new UpsertDomainViewModel();
-        public EditModel(IMyLogger myLogger, IUnitOfWork unitOfWork)
+        public EditModel(IMyLogger myLogger, IMapper mapper, IUnitOfWork unitOfWork)
         {
             _logger = myLogger;
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
                 return NotFound();
 
-            var domain = await _unitOfWork.CardRepository.GetFirstOrDefaultAsync<DomainCard>(d => d.Id == id);
-            if (domain == null)
+            var entity = await _unitOfWork.CardRepository.GetFirstOrDefaultAsync<DomainCard>(d => d.Id == id);
+            if (entity == null)
                 return NotFound();
 
-            DomainViewModel.DomainCard = domain;
+            DomainViewModel.DomainCardDto = _mapper.Map<DomainCardDto>(entity);
             await PopulateDropdown();
 
             return Page();
@@ -38,21 +42,40 @@ namespace DHCardHelper.Areas.GameMaster.Pages.Cards.Domain
 
         public async Task<IActionResult> OnPostAsync(int? id)
         {
-            if (!ModelState.IsValid)
-                return Page();
-
             if (id == null)
                 return NotFound();
+
+            await PopulateDropdown();
+
+            if (!ModelState.IsValid)
+                return Page();
 
             var entity = await _unitOfWork.CardRepository
                 .GetFirstOrDefaultAsync<DomainCard>(d => d.Id == id);
             if (entity == null)
                 return NotFound();
 
+            var domainForeignKeyValid = await _unitOfWork.DomainRepository.AnyAsync(d => d.Id == DomainViewModel.DomainCardDto.DomainId);
+            if (!domainForeignKeyValid)
+            {
+                ModelState.AddModelError("DomainViewModel.DomainCardDto.DomainId", "Invalid domain selected.");
+                return Page();
+            }
 
-            return Page();
+            var typeForeignKeyValid = await _unitOfWork.TypeRepository.AnyAsync(t => t.Id == DomainViewModel.DomainCardDto.TypeId);
+            if (!typeForeignKeyValid)
+            {
+                ModelState.AddModelError("DomainViewModel.DomainCardDto.TypeId", "Invalid type selected.");
+                return Page();
+            }
+
+            _mapper.Map(DomainViewModel.DomainCardDto, entity);
+            await _unitOfWork.SaveAsync();
+
+            TempData["Success"] = "Domain card edited successfully!";
+
+            return Redirect("/Player/Cards/Domains/Index");
         }
-
 
         private async Task PopulateDropdown()
         {
@@ -63,26 +86,15 @@ namespace DHCardHelper.Areas.GameMaster.Pages.Cards.Domain
             {
                 Text = d.Name,
                 Value = d.Id.ToString(),
-                Selected = ShouldBeSelected(d.Id)
+                Selected = d.Id == DomainViewModel.DomainCardDto.DomainId
             });
 
             DomainViewModel.AvailableTypes = types.Select(t => new SelectListItem
             {
                 Text = t.Name,
                 Value = t.Id.ToString(),
-                Selected = ShouldBeSelected(t.Id)
+                Selected = t.Id == DomainViewModel.DomainCardDto.TypeId
             });
-        }
-
-        private bool ShouldBeSelected(int id)
-        {
-            if (DomainViewModel.DomainCard == null)
-                return false;
-
-            if (DomainViewModel.DomainCard.Id == id)
-                return true;
-
-            return false;
         }
 
     }
