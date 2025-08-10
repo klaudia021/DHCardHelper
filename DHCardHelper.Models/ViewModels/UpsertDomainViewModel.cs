@@ -1,4 +1,4 @@
-﻿using DHCardHelper.Models.Entities.Cards;
+﻿using DHCardHelper.Models.DTOs;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -6,7 +6,7 @@ namespace DHCardHelper.Models.ViewModels
 {
     public class UpsertDomainViewModel
     {
-        public DomainCard DomainCard { get; set; }
+        public DomainCardDto DomainCardDto { get; set; }
 
         [ValidateNever]
         public IEnumerable<SelectListItem> AvailableTypes { get; set; }

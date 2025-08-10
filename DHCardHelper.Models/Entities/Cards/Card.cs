@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DHCardHelper.Models.Entities.Cards
 {
@@ -19,6 +16,18 @@ namespace DHCardHelper.Models.Entities.Cards
         [MinLength(10)]
         [Required]
         public string Feature { get; set; }
+
+        public int? DomainId { get; set; }
+
+        [ForeignKey("DomainId")]
+        [ValidateNever]
+        public Domain? Domain { get; set; }
+
+        public int? TypeId { get; set; }
+
+        [ForeignKey("TypeId")]
+        [ValidateNever]
+        public Entities.Type? Type { get; set; }
 
     }
 }

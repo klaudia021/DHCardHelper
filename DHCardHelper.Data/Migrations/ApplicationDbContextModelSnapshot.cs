@@ -21,7 +21,48 @@ namespace DHCardHelper.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("DHCardHelper.Models.AvailableTypes.Domain", b =>
+            modelBuilder.Entity("DHCardHelper.Models.Entities.Cards.Card", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CardType")
+                        .IsRequired()
+                        .HasMaxLength(13)
+                        .HasColumnType("nvarchar(13)");
+
+                    b.Property<int?>("DomainId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Feature")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int?>("TypeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DomainId");
+
+                    b.HasIndex("TypeId");
+
+                    b.ToTable("Cards");
+
+                    b.HasDiscriminator<string>("CardType").HasValue("Card");
+
+                    b.UseTphMappingStrategy();
+                });
+
+            modelBuilder.Entity("DHCardHelper.Models.Entities.Domain", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -38,7 +79,7 @@ namespace DHCardHelper.Data.Migrations
                     b.ToTable("Domains");
                 });
 
-            modelBuilder.Entity("DHCardHelper.Models.AvailableTypes.Type", b =>
+            modelBuilder.Entity("DHCardHelper.Models.Entities.Type", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -55,40 +96,9 @@ namespace DHCardHelper.Data.Migrations
                     b.ToTable("Types");
                 });
 
-            modelBuilder.Entity("DHCardHelper.Models.Cards.Card", b =>
+            modelBuilder.Entity("DHCardHelper.Models.Entities.Cards.BackgroundCard", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("CardType")
-                        .IsRequired()
-                        .HasMaxLength(13)
-                        .HasColumnType("nvarchar(13)");
-
-                    b.Property<string>("Feature")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Cards");
-
-                    b.HasDiscriminator<string>("CardType").HasValue("Card");
-
-                    b.UseTphMappingStrategy();
-                });
-
-            modelBuilder.Entity("DHCardHelper.Models.Cards.BackgroundCard", b =>
-                {
-                    b.HasBaseType("DHCardHelper.Models.Cards.Card");
+                    b.HasBaseType("DHCardHelper.Models.Entities.Cards.Card");
 
                     b.Property<string>("Desciption")
                         .IsRequired()
@@ -97,12 +107,9 @@ namespace DHCardHelper.Data.Migrations
                     b.HasDiscriminator().HasValue("Background");
                 });
 
-            modelBuilder.Entity("DHCardHelper.Models.Cards.DomainCard", b =>
+            modelBuilder.Entity("DHCardHelper.Models.Entities.Cards.DomainCard", b =>
                 {
-                    b.HasBaseType("DHCardHelper.Models.Cards.Card");
-
-                    b.Property<int>("DomainId")
-                        .HasColumnType("int");
+                    b.HasBaseType("DHCardHelper.Models.Entities.Cards.Card");
 
                     b.Property<int>("Level")
                         .HasColumnType("int");
@@ -110,19 +117,12 @@ namespace DHCardHelper.Data.Migrations
                     b.Property<int>("RecallCost")
                         .HasColumnType("int");
 
-                    b.Property<int>("TypeId")
-                        .HasColumnType("int");
-
-                    b.HasIndex("DomainId");
-
-                    b.HasIndex("TypeId");
-
                     b.HasDiscriminator().HasValue("Domain");
                 });
 
-            modelBuilder.Entity("DHCardHelper.Models.Cards.SubclassCard", b =>
+            modelBuilder.Entity("DHCardHelper.Models.Entities.Cards.SubclassCard", b =>
                 {
-                    b.HasBaseType("DHCardHelper.Models.Cards.Card");
+                    b.HasBaseType("DHCardHelper.Models.Entities.Cards.Card");
 
                     b.Property<string>("MasteryType")
                         .IsRequired()
@@ -131,19 +131,15 @@ namespace DHCardHelper.Data.Migrations
                     b.HasDiscriminator().HasValue("Subclass");
                 });
 
-            modelBuilder.Entity("DHCardHelper.Models.Cards.DomainCard", b =>
+            modelBuilder.Entity("DHCardHelper.Models.Entities.Cards.Card", b =>
                 {
-                    b.HasOne("DHCardHelper.Models.AvailableTypes.Domain", "Domain")
+                    b.HasOne("DHCardHelper.Models.Entities.Domain", "Domain")
                         .WithMany()
-                        .HasForeignKey("DomainId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DomainId");
 
-                    b.HasOne("DHCardHelper.Models.AvailableTypes.Type", "Type")
+                    b.HasOne("DHCardHelper.Models.Entities.Type", "Type")
                         .WithMany()
-                        .HasForeignKey("TypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TypeId");
 
                     b.Navigation("Domain");
 

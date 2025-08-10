@@ -27,6 +27,18 @@ namespace DHCardHelper.Data
                 .HasValue<DomainCard>("Domain")
                 .HasValue<SubclassCard>("Subclass");
 
+            modelBuilder.Entity<Card>()
+                .HasOne(c => c.Domain)
+                .WithMany()
+                .HasForeignKey(c => c.DomainId)
+                .IsRequired(false);
+
+            modelBuilder.Entity<Card>()
+                .HasOne(c => c.Type)
+                .WithMany()
+                .HasForeignKey(c => c.TypeId)
+                .IsRequired(false);
+
             modelBuilder.Entity<Domain>();
             modelBuilder.Entity<Models.Entities.Type>();
 

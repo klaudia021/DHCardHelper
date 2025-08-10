@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq.Expressions;
 using DHCardHelper.Data.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,6 +17,11 @@ namespace DHCardHelper.Data.Repository
         public async Task AddAsync(T entity)
         {
             await _dbSet.AddAsync(entity);
+        }
+
+        public async Task<bool> AnyAsync(Expression<Func<T, bool>> filter)
+        {
+            return await _dbSet.AnyAsync(filter);
         }
 
         public async Task<IEnumerable<T>> GetAllAsync()
