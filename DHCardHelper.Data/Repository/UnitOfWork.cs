@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DHCardHelper.Data.Repository.IRepository;
-using DHCardHelper.Models.Entities.Cards;
+﻿using DHCardHelper.Data.Repository.IRepository;
 using DHCardHelper.Models.Entities;
 
 namespace DHCardHelper.Data.Repository
