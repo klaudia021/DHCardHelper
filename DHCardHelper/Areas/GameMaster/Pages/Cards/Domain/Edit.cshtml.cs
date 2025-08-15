@@ -35,7 +35,8 @@ namespace DHCardHelper.Areas.GameMaster.Pages.Cards.Domain
                 return NotFound();
 
             DomainViewModel.DomainCardDto = _mapper.Map<DomainCardDto>(entity);
-            await PopulateDropdown();
+
+            await PopulateDropdowns();
 
             return Page();
         }
@@ -45,7 +46,7 @@ namespace DHCardHelper.Areas.GameMaster.Pages.Cards.Domain
             if (id == null)
                 return NotFound();
 
-            await PopulateDropdown();
+            await PopulateDropdowns();
 
             if (!ModelState.IsValid)
                 return Page();
@@ -55,19 +56,11 @@ namespace DHCardHelper.Areas.GameMaster.Pages.Cards.Domain
             if (entity == null)
                 return NotFound();
 
-            var domainForeignKeyValid = await _unitOfWork.DomainRepository.AnyAsync(d => d.Id == DomainViewModel.DomainCardDto.DomainId);
-            if (!domainForeignKeyValid)
-            {
-                ModelState.AddModelError("DomainViewModel.DomainCardDto.DomainId", "Invalid domain selected.");
-                return Page();
-            }
+            var domainForeignKeyValid = await this.IsForeignKeyValid(_unitOfWork.DomainRepository, d => d.Id == DomainViewModel.DomainCardDto.DomainId);
+            var typeForeignKeyValid = await this.IsForeignKeyValid(_unitOfWork.DomainCardTypeRepository, t => t.Id == DomainViewModel.DomainCardDto.TypeId);
 
-            var typeForeignKeyValid = await _unitOfWork.TypeRepository.AnyAsync(t => t.Id == DomainViewModel.DomainCardDto.TypeId);
-            if (!typeForeignKeyValid)
-            {
-                ModelState.AddModelError("DomainViewModel.DomainCardDto.TypeId", "Invalid type selected.");
+            if (!domainForeignKeyValid || !typeForeignKeyValid)
                 return Page();
-            }
 
             _mapper.Map(DomainViewModel.DomainCardDto, entity);
             await _unitOfWork.SaveAsync();
@@ -77,10 +70,10 @@ namespace DHCardHelper.Areas.GameMaster.Pages.Cards.Domain
             return Redirect("/Player/Cards/Domains/Index");
         }
 
-        private async Task PopulateDropdown()
+        private async Task PopulateDropdowns()
         {
             var domains = await _unitOfWork.DomainRepository.GetAllAsync();
-            var types = await _unitOfWork.TypeRepository.GetAllAsync();
+            var types = await _unitOfWork.DomainCardTypeRepository.GetAllAsync();
 
             DomainViewModel.AvailableDomains = domains.Select(d => new SelectListItem
             {

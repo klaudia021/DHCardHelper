@@ -13,12 +13,14 @@
                         <div class="form-floating">
                             <select asp-for="DomainViewModel.DomainCardDto.DomainId" asp-items="Model.DomainViewModel.AvailableDomains" class="form-select"></select>
                             <label>Domain</label>
+                            <span asp-validation-for="DomainViewModel.DomainCardDto.DomainId" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col-12 col-lg-3">
                         <div class="form-floating">
                             <select asp-for="DomainViewModel.DomainCardDto.TypeId" asp-items="Model.DomainViewModel.AvailableTypes" class="form-select"></select>
                             <label>Type</label>
+                            <span asp-validation-for="DomainViewModel.DomainCardDto.TypeId" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col-12 col-lg-3">

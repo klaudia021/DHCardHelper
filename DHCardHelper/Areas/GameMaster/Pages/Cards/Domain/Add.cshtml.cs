@@ -26,30 +26,22 @@ namespace DHCardHelper.Areas.GameMaster.Pages.Cards.Domain
         [BindProperty]
         public UpsertDomainViewModel DomainViewModel { get; set; } = new UpsertDomainViewModel();
 
-        public async Task OnGet()
+        public async Task OnGetAsync()
         {
             await PopulateDropDowns();
         }
-        public async Task<IActionResult> OnPost()
+        public async Task<IActionResult> OnPostAsync()
         {
             await PopulateDropDowns();
 
             if (!ModelState.IsValid)
                 return Page();
 
-            var domainForeignKeyValid = await _unitOfWork.DomainRepository.AnyAsync(d => d.Id == DomainViewModel.DomainCardDto.DomainId);
-            if (!domainForeignKeyValid)
-            {
-                ModelState.AddModelError("DomainViewModel.DomainCardDto.DomainId", "Invalid domain selected.");
-                return Page();
-            }
+            var domainForeignKeyValid = await this.IsForeignKeyValid(_unitOfWork.DomainRepository, d => d.Id == DomainViewModel.DomainCardDto.DomainId);
+            var typeForeignKeyValid = await this.IsForeignKeyValid(_unitOfWork.DomainCardTypeRepository, t => t.Id == DomainViewModel.DomainCardDto.TypeId);
 
-            var typeForeignKeyValid = await _unitOfWork.TypeRepository.AnyAsync(t => t.Id == DomainViewModel.DomainCardDto.TypeId);
-            if (!typeForeignKeyValid)
-            {
-                ModelState.AddModelError("DomainViewModel.DomainCardDto.TypeId", "Invalid type selected.");
+            if (!domainForeignKeyValid || !typeForeignKeyValid)
                 return Page();
-            }
 
             DomainCard newEntity = _mapper.Map<DomainCard>(DomainViewModel.DomainCardDto);
             await _unitOfWork.CardRepository.AddAsync(newEntity);
@@ -69,7 +61,7 @@ namespace DHCardHelper.Areas.GameMaster.Pages.Cards.Domain
                 Text = d.Name
             });
 
-            var availableTypes = await _unitOfWork.TypeRepository.GetAllAsync();
+            var availableTypes = await _unitOfWork.DomainCardTypeRepository.GetAllAsync();
             DomainViewModel.AvailableTypes = availableTypes.Select(t => new SelectListItem
             {
                 Value = t.Id.ToString(),
