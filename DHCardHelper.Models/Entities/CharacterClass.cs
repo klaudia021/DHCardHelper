@@ -2,8 +2,9 @@
 
 namespace DHCardHelper.Models.Entities
 {
-    public class Type
+    public class CharacterClass
     {
+        [Key]
         public int Id { get; set; }
 
         [Required]

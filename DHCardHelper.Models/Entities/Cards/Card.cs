@@ -17,17 +17,32 @@ namespace DHCardHelper.Models.Entities.Cards
         [Required]
         public string Feature { get; set; }
 
+
         public int? DomainId { get; set; }
 
         [ForeignKey("DomainId")]
         [ValidateNever]
         public Domain? Domain { get; set; }
 
-        public int? TypeId { get; set; }
+        public int? DomainCardTypeId { get; set; }
 
         [ForeignKey("TypeId")]
         [ValidateNever]
-        public Entities.Type? Type { get; set; }
+        public DomainCardType? DomainCardType { get; set; }
+
+
+        public int? CharacterClassId { get; set; }
+
+        [ForeignKey("CharacterClassId")]
+        [ValidateNever]
+        public CharacterClass? CharacterClass { get; set; }
+
+
+        public int? BackgroundTypeId { get; set; }
+
+        [ForeignKey("BackgroundTypeId")]
+        [ValidateNever]
+        public BackgroundCardType? BackgroundType { get; set; }
 
     }
 }

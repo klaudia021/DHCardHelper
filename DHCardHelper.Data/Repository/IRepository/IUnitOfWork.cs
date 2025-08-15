@@ -6,7 +6,9 @@ namespace DHCardHelper.Data.Repository.IRepository
     {
         ICardRepository CardRepository { get; }
         IRepository<Domain> DomainRepository { get; }
-        IRepository<Models.Entities.Type> TypeRepository { get; }
+        IRepository<DomainCardType> DomainCardTypeRepository { get; }
+        IRepository<CharacterClass> CharacterClassRepository { get; }
+        IRepository<BackgroundCardType> BackgroundCardTypeRepository { get; }
 
         Task<int> SaveAsync();
     }

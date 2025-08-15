@@ -12,7 +12,7 @@ namespace DHCardHelper.Models.DTOs.MappingProfile
                 .Map(dest => dest.Title, src => src.Title)
                 .Map(dest => dest.Feature, src => src.Feature)
                 .Map(dest => dest.DomainId, src => src.DomainId)
-                .Map(dest => dest.TypeId, src => src.TypeId)
+                .Map(dest => dest.TypeId, src => src.DomainCardTypeId)
                 .Map(dest => dest.Level, src => src.Level)
                 .Map(dest => dest.RecallCost, src => src.RecallCost);
 
@@ -21,9 +21,23 @@ namespace DHCardHelper.Models.DTOs.MappingProfile
                 .Map(dest => dest.Title, src => src.Title)
                 .Map(dest => dest.Feature, src => src.Feature)
                 .Map(dest => dest.DomainId, src => src.DomainId)
-                .Map(dest => dest.TypeId, src => src.TypeId)
+                .Map(dest => dest.DomainCardTypeId, src => src.TypeId)
                 .Map(dest => dest.Level, src => src.Level)
                 .Map(dest => dest.RecallCost, src => src.RecallCost);
+
+            TypeAdapterConfig<BackgroundCardDto, BackgroundCard>.NewConfig()
+                .Ignore(dest => dest.Id)
+                .Map(dest => dest.Title, src => src.Title)
+                .Map(dest => dest.Feature, src => src.Feature)
+                .Map(dest => dest.Desciption, src => src.Desciption)
+                .Map(dest => dest.BackgroundTypeId, src => src.BackgroundTypeId);
+
+            TypeAdapterConfig<BackgroundCard, BackgroundCardDto>.NewConfig()
+                .Ignore(dest => dest.Id)
+                .Map(dest => dest.Title, src => src.Title)
+                .Map(dest => dest.Feature, src => src.Feature)
+                .Map(dest => dest.Desciption, src => src.Desciption)
+                .Map(dest => dest.BackgroundTypeId, src => src.BackgroundTypeId);
         }
     }
 }

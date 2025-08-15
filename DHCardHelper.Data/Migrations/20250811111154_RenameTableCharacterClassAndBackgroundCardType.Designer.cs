@@ -3,6 +3,7 @@ using DHCardHelper.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DHCardHelper.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250811111154_RenameTableCharacterClassAndBackgroundCardType")]
+    partial class RenameTableCharacterClassAndBackgroundCardType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,7 +38,7 @@ namespace DHCardHelper.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("BackgroundCardTypes", (string)null);
+                    b.ToTable("BackgroundCardTypes");
                 });
 
             modelBuilder.Entity("DHCardHelper.Models.Entities.Cards.Card", b =>
@@ -106,7 +109,7 @@ namespace DHCardHelper.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CharacterClasses", (string)null);
+                    b.ToTable("CharacterClasses");
                 });
 
             modelBuilder.Entity("DHCardHelper.Models.Entities.Domain", b =>
@@ -123,7 +126,7 @@ namespace DHCardHelper.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Domains", (string)null);
+                    b.ToTable("Domains");
                 });
 
             modelBuilder.Entity("DHCardHelper.Models.Entities.DomainCardType", b =>
@@ -140,7 +143,7 @@ namespace DHCardHelper.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DomainCardTypes", (string)null);
+                    b.ToTable("DomainCardTypes");
                 });
 
             modelBuilder.Entity("DHCardHelper.Models.Entities.Cards.BackgroundCard", b =>
