@@ -26,12 +26,12 @@ namespace DHCardHelper.Areas.GameMaster.Pages.Cards.Background
             _logger = mylogger;
             _mapper = mapper;
         }
-        public async Task OnGet()
+        public async Task OnGetAsync()
         {
             await PopulateDropDown();
         }
 
-        public async Task<IActionResult> OnPost()
+        public async Task<IActionResult> OnPostAsync()
         {
             await PopulateDropDown();
 
