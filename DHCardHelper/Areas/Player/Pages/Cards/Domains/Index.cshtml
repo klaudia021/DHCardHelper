@@ -42,13 +42,13 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var card in Model.FilteredCards.OrderBy(c => c.Type))
+            @foreach (var card in Model.DomainCards.OrderBy(c => c.DomainId))
             {
                 <tr class="table-light" data-bs-toggle="collapse" data-bs-target="#details-@card.Id" aria-expanded="false" aria-controls="details-@card.Id">
                     <td>@card.Domain.Name</td>
                     <td>@card.Title</td>
                     <td>@card.Level</td>
-                    <td>@card.Type.Name</td>
+                    <td>@card.DomainCardType.Name</td>
                     <td>@card.RecallCost</td>
                 </tr>
                 <tr>
