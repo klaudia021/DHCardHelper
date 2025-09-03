@@ -14,12 +14,17 @@ namespace DHCardHelper.Data.Repository
             _db = db;
         }
 
-        public async Task<IEnumerable<TDerived>> GetAllByTypeAsync<TDerived>() 
+        public async Task<IEnumerable<TDerived>> GetAllByTypeAsync<TDerived>(params Expression<Func<TDerived, object>>[] includes) 
             where TDerived : Card
         {
-            return await _db.Set<Card>()
-                .OfType<TDerived>()
-                .ToListAsync();
+            IQueryable<TDerived> query = _db.Set<TDerived>();
+
+            foreach (var include in includes)
+            {
+                query = query.Include(include);
+            }
+
+            return await query.ToListAsync();
         }
         public async Task<TDerived?> GetFirstOrDefaultAsync<TDerived>(
             Expression<Func<TDerived, bool>> filter) 

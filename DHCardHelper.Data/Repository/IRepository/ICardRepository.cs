@@ -5,7 +5,7 @@ namespace DHCardHelper.Data.Repository.IRepository
 {
     public interface ICardRepository : IRepository<Card>
     {
-        Task<IEnumerable<TDerived>> GetAllByTypeAsync<TDerived>()
+        Task<IEnumerable<TDerived>> GetAllByTypeAsync<TDerived>(params Expression<Func<TDerived, object>>[] includes)
             where TDerived : Card;
         Task<TDerived?> GetFirstOrDefaultAsync<TDerived>(Expression<Func<TDerived, bool>> filter)
             where TDerived : Card;
