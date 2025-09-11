@@ -11,20 +11,21 @@ namespace DHCardHelper.Services
             var isForeignKeyValid = await repository.AnyAsync(filter);
 
             if (!isForeignKeyValid)
-            {
-                string memberName = GetFullExpressionName<T>(filter);
-                model.ModelState.AddModelError(memberName, "Invalid data selected.");
-
                 return false;
-            }
 
             return true;
         }
 
-        private static string GetFullExpressionName<T>(Expression<Func<T, bool>> expression) where T : class
+        public static void AddErrorToModel<TModel, TProperty>(this PageModel model, Expression<Func<TModel, TProperty>> expression) where TModel : class
+        {
+            var memberName = GetFullExpressionName(expression);
+            model.ModelState.AddModelError(memberName, "Invalid data provided!");
+        }
+
+        private static string GetFullExpressionName<TModel, TProperty>(Expression<Func<TModel, TProperty>> expression) where TModel : class
         {
             var memberNames = new List<string>();
-            var memberExpression = ((BinaryExpression)expression.Body).Right as MemberExpression;
+            var memberExpression = expression.Body as MemberExpression;
 
             while (memberExpression != null)
             {

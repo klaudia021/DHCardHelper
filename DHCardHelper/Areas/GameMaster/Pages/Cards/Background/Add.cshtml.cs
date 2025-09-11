@@ -40,7 +40,10 @@ namespace DHCardHelper.Areas.GameMaster.Pages.Cards.Background
 
             var backgroundTypeForeignKeyValid = await this.IsForeignKeyValid(_unitOfWork.BackgroundCardTypeRepository, t => t.Id == BackgroundViewModel.BackgroundCardDto.BackgroundTypeId);
             if (!backgroundTypeForeignKeyValid)
+            {
+                this.AddErrorToModel<UpsertBackgroundViewModel, int>(t => BackgroundViewModel.BackgroundCardDto.BackgroundTypeId);
                 return Page();
+            }
 
             BackgroundCard newEntity = _mapper.Map<BackgroundCard>(BackgroundViewModel.BackgroundCardDto);
             await _unitOfWork.CardRepository.AddAsync(newEntity);
