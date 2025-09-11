@@ -21,41 +21,7 @@ namespace DHCardHelper.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("DHCardHelper.Models.Cards.Card", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("CardType")
-                        .IsRequired()
-                        .HasMaxLength(13)
-                        .HasColumnType("nvarchar(13)");
-
-                    b.Property<string>("Feature")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("_cards");
-
-                    b.HasDiscriminator<string>("CardType").HasValue("Card");
-
-                    b.UseTphMappingStrategy();
-                });
-
-            modelBuilder.Entity("DHCardHelper.Models.Domains.AvailableDomain", b =>
+            modelBuilder.Entity("DHCardHelper.Models.Entities.BackgroundCardType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -69,12 +35,117 @@ namespace DHCardHelper.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("_domains");
+                    b.ToTable("BackgroundCardTypes", (string)null);
                 });
 
-            modelBuilder.Entity("DHCardHelper.Models.Cards.BackgroundCard", b =>
+            modelBuilder.Entity("DHCardHelper.Models.Entities.Cards.Card", b =>
                 {
-                    b.HasBaseType("DHCardHelper.Models.Cards.Card");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("BackgroundTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CardType")
+                        .IsRequired()
+                        .HasMaxLength(13)
+                        .HasColumnType("nvarchar(13)");
+
+                    b.Property<int?>("CharacterClassId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("DomainCardTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("DomainId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Feature")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int?>("TypeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BackgroundTypeId");
+
+                    b.HasIndex("CharacterClassId");
+
+                    b.HasIndex("DomainCardTypeId");
+
+                    b.HasIndex("DomainId");
+
+                    b.ToTable("Cards");
+
+                    b.HasDiscriminator<string>("CardType").HasValue("Card");
+
+                    b.UseTphMappingStrategy();
+                });
+
+            modelBuilder.Entity("DHCardHelper.Models.Entities.CharacterClass", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CharacterClasses", (string)null);
+                });
+
+            modelBuilder.Entity("DHCardHelper.Models.Entities.Domain", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Domains", (string)null);
+                });
+
+            modelBuilder.Entity("DHCardHelper.Models.Entities.DomainCardType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DomainCardTypes", (string)null);
+                });
+
+            modelBuilder.Entity("DHCardHelper.Models.Entities.Cards.BackgroundCard", b =>
+                {
+                    b.HasBaseType("DHCardHelper.Models.Entities.Cards.Card");
 
                     b.Property<string>("Desciption")
                         .IsRequired()
@@ -83,13 +154,9 @@ namespace DHCardHelper.Data.Migrations
                     b.HasDiscriminator().HasValue("Background");
                 });
 
-            modelBuilder.Entity("DHCardHelper.Models.Cards.DomainCard", b =>
+            modelBuilder.Entity("DHCardHelper.Models.Entities.Cards.DomainCard", b =>
                 {
-                    b.HasBaseType("DHCardHelper.Models.Cards.Card");
-
-                    b.Property<string>("Domain")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.HasBaseType("DHCardHelper.Models.Entities.Cards.Card");
 
                     b.Property<int>("Level")
                         .HasColumnType("int");
@@ -100,15 +167,42 @@ namespace DHCardHelper.Data.Migrations
                     b.HasDiscriminator().HasValue("Domain");
                 });
 
-            modelBuilder.Entity("DHCardHelper.Models.Cards.SubclassCard", b =>
+            modelBuilder.Entity("DHCardHelper.Models.Entities.Cards.SubclassCard", b =>
                 {
-                    b.HasBaseType("DHCardHelper.Models.Cards.Card");
+                    b.HasBaseType("DHCardHelper.Models.Entities.Cards.Card");
 
                     b.Property<string>("MasteryType")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("Subclass");
+                });
+
+            modelBuilder.Entity("DHCardHelper.Models.Entities.Cards.Card", b =>
+                {
+                    b.HasOne("DHCardHelper.Models.Entities.BackgroundCardType", "BackgroundType")
+                        .WithMany()
+                        .HasForeignKey("BackgroundTypeId");
+
+                    b.HasOne("DHCardHelper.Models.Entities.CharacterClass", "CharacterClass")
+                        .WithMany()
+                        .HasForeignKey("CharacterClassId");
+
+                    b.HasOne("DHCardHelper.Models.Entities.DomainCardType", "DomainCardType")
+                        .WithMany()
+                        .HasForeignKey("DomainCardTypeId");
+
+                    b.HasOne("DHCardHelper.Models.Entities.Domain", "Domain")
+                        .WithMany()
+                        .HasForeignKey("DomainId");
+
+                    b.Navigation("BackgroundType");
+
+                    b.Navigation("CharacterClass");
+
+                    b.Navigation("Domain");
+
+                    b.Navigation("DomainCardType");
                 });
 #pragma warning restore 612, 618
         }
