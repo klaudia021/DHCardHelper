@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace DHCardHelper.Models.Entities
 {
@@ -8,5 +9,10 @@ namespace DHCardHelper.Models.Entities
 
         [Required]
         public string Name { get; set; }
+
+        [Range(3, 8)]
+        [DisplayName("Color")]
+        [Required]
+        public string Color { get; set; }
     }
 }

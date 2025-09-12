@@ -22,23 +22,16 @@ namespace DHCardHelper.Pages.Cards.Domains
             _logger = logger;
             _unitOfWork = unitOfWork;
         }
-        public async Task OnGet()
+        public async Task OnGetAsync()
         {
-            try
-            {
-                var allDomainCards = await _unitOfWork.CardRepository.GetAllByTypeAsync<DomainCard>(c => c.DomainCardType, c=> c.Domain);
+            var allDomainCards = await _unitOfWork.CardRepository.GetAllByTypeAsync<DomainCard>(c => c.DomainCardType, c => c.Domain);
 
-                if (allDomainCards.IsNullOrEmpty())
-                {
-                    await DatabaseSeeder.SeedDatabaseAsync(_unitOfWork);
-                }
-
-                DomainCards = allDomainCards;
-            }
-            catch (Exception ex)
+            if (allDomainCards.IsNullOrEmpty())
             {
-                _logger.Error(ex.Message);
+                await DatabaseSeeder.SeedDatabaseAsync(_unitOfWork);
             }
+
+            DomainCards = allDomainCards;
         }
     }
 }
