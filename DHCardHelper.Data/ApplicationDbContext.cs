@@ -48,6 +48,10 @@ namespace DHCardHelper.Data
                 .HasForeignKey(c => c.BackgroundTypeId)
                 .IsRequired(false);
 
+            modelBuilder.Entity<SubclassCard>()
+                .Property(m => m.MasteryType)
+                .HasConversion<string>();
+
             modelBuilder.Entity<Domain>();
             modelBuilder.Entity<DomainCardType>();
             modelBuilder.Entity<CharacterClass>();

@@ -1,4 +1,5 @@
 ﻿using DHCardHelper.Models.Entities.Cards;
+using DHCardHelper.Models.Types;
 using System.ComponentModel.DataAnnotations;
 
 namespace DHCardHelper.Models.DTOs
@@ -6,7 +7,7 @@ namespace DHCardHelper.Models.DTOs
     public class SubclassCardDto : CardDto
     {
         [Required]
-        public string MasteryType { get; set; }
+        public MasteryType MasteryType { get; set; }
 
         [Required]
         public int CharacterClassId { get; set; }
