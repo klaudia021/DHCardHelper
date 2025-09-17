@@ -41,7 +41,7 @@ namespace DHCardHelper.Areas.GameMaster.Pages.Cards.Background
             var backgroundTypeForeignKeyValid = await this.IsForeignKeyValid(_unitOfWork.BackgroundCardTypeRepository, t => t.Id == BackgroundViewModel.BackgroundCardDto.BackgroundTypeId);
             if (!backgroundTypeForeignKeyValid)
             {
-                this.AddErrorToModel<UpsertBackgroundViewModel, int>(t => BackgroundViewModel.BackgroundCardDto.BackgroundTypeId);
+                this.AddErrorToModel(() => BackgroundViewModel.BackgroundCardDto.BackgroundTypeId);
                 return Page();
             }
 
@@ -51,6 +51,7 @@ namespace DHCardHelper.Areas.GameMaster.Pages.Cards.Background
             try
             {
                 await _unitOfWork.SaveAsync();
+                TempData["Success"] = "Heritage added successfully";
 
                 return Redirect("./Add");
             }

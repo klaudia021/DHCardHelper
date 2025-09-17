@@ -16,13 +16,13 @@ namespace DHCardHelper.Services
             return true;
         }
 
-        public static void AddErrorToModel<TModel, TProperty>(this PageModel model, Expression<Func<TModel, TProperty>> expression) where TModel : class
+        public static void AddErrorToModel<T>(this PageModel model, Expression<Func<T>> expression) where T: struct
         {
             var memberName = GetFullExpressionName(expression);
             model.ModelState.AddModelError(memberName, "Invalid data provided!");
         }
 
-        private static string GetFullExpressionName<TModel, TProperty>(Expression<Func<TModel, TProperty>> expression) where TModel : class
+        private static string GetFullExpressionName<T>(Expression<Func<T>> expression) where T : struct
         {
             var memberNames = new List<string>();
             var memberExpression = expression.Body as MemberExpression;

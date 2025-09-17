@@ -38,6 +38,20 @@ namespace DHCardHelper.Models.DTOs.MappingProfile
                 .Map(dest => dest.Feature, src => src.Feature)
                 .Map(dest => dest.Desciption, src => src.Desciption)
                 .Map(dest => dest.BackgroundTypeId, src => src.BackgroundTypeId);
+
+            TypeAdapterConfig<SubclassCardDto, SubclassCard>.NewConfig()
+                .Ignore(dest => dest.Id)
+                .Map(dest => dest.Title, src => src.Title)
+                .Map(dest => dest.Feature, src => src.Feature)
+                .Map(dest => dest.CharacterClassId, src => src.CharacterClassId)
+                .Map(dest => dest.MasteryType, src => src.MasteryType);
+
+            TypeAdapterConfig<SubclassCard, SubclassCardDto>.NewConfig()
+                .Ignore(dest => dest.Id)
+                .Map(dest => dest.Title, src => src.Title)
+                .Map(dest => dest.Feature, src => src.Feature)
+                .Map(dest => dest.CharacterClassId, src => src.CharacterClassId)
+                .Map(dest => dest.MasteryType, src => src.MasteryType);
         }
     }
 }

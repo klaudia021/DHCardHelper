@@ -1,0 +1,62 @@
+﻿@page
+@model DHCardHelper.Areas.GameMaster.Pages.Cards.Subclass.AddModel
+
+<div class="container">
+    <div class="card shadow border-0 my-4">
+        <div class="card-header text-center bg-light m-lg-0">
+            <h1>Add Subclass</h1>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                <div class="row gy-3 mx-lg-3 my-3">
+                    <div class="col-12 col-lg-6">
+                        <div class="form-floating">
+                            <select asp-for="SubclassViewModel.SubclassCardDto.CharacterClassId" asp-items="Model.SubclassViewModel.AvailableClasses" class="form-select"></select>
+                            <label>Class</label>
+                            <span asp-validation-for="SubclassViewModel.SubclassCardDto.CharacterClassId" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6">
+                        <div class="form-floating">
+                            <select asp-for="SubclassViewModel.SubclassCardDto.MasteryType" asp-items="Model.SubclassViewModel.AvailableMasteryTypes" class="form-select"></select>
+                            <label>Mastery Type</label>
+                            <span asp-validation-for="SubclassViewModel.SubclassCardDto.MasteryType" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row gy-3 mx-lg-3">
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <input asp-for="SubclassViewModel.SubclassCardDto.Title" class="form-control" />
+                            <label asp-for="SubclassViewModel.SubclassCardDto.Title"></label>
+                            <span asp-validation-for="SubclassViewModel.SubclassCardDto.Title" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mx-lg-3 my-3">
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <textarea asp-for="SubclassViewModel.SubclassCardDto.Feature" class="form-control" style="height:200px"></textarea>
+                            <label asp-for="SubclassViewModel.SubclassCardDto.Feature"></label>
+                            <span asp-validation-for="SubclassViewModel.SubclassCardDto.Feature" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row gy-3 mx-lg-3 my-lg-3">
+                    <div class="col-0 col-md-10"></div>
+                    <div class="col-12 col-md-2 text-end">
+                        <button class="btn btn-dark btn-sm w-100" type="submit">Add</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
