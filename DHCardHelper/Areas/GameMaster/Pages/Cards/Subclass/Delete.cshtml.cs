@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
-namespace DHCardHelper.Areas.GameMaster.Pages.Cards.Subclasses
+namespace DHCardHelper.Areas.GameMaster.Pages.Cards.Subclass
 {
     [ValidateAntiForgeryToken]
     [Area("GameMaster")]
