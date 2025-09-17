@@ -57,9 +57,13 @@ namespace DHCardHelper.Areas.GameMaster.Pages.Cards.Background
             if (entity == null)
                 return NotFound();
 
-            var typeForeignKeyValid = await this.IsForeignKeyValid(_unitOfWork.BackgroundCardTypeRepository, t => t.Id == BackgroundViewModel.BackgroundCardDto.BackgroundTypeId);
-            if (!typeForeignKeyValid)
+            var backgroundTypeForeignKeyValid = await this.IsForeignKeyValid(_unitOfWork.BackgroundCardTypeRepository, t => t.Id == BackgroundViewModel.BackgroundCardDto.BackgroundTypeId);
+            if (!backgroundTypeForeignKeyValid)
+            {
+                this.AddErrorToModel(() => BackgroundViewModel.BackgroundCardDto.BackgroundTypeId);
+
                 return Page();
+            }
 
             _mapper.Map(BackgroundViewModel.BackgroundCardDto, entity);
             await _unitOfWork.SaveAsync();
