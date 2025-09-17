@@ -124,6 +124,9 @@ namespace DHCardHelper.Tests.DHCardHelper.Areas.GameMaster.Pages.Cards.Backgroun
             _mockBackgroundCardTypeRepo.Setup(r => r.AnyAsync(It.IsAny<Expression<Func<BackgroundCardType, bool>>>()))
                 .ReturnsAsync(true);
 
+            Mock<ITempDataDictionary> MockTempData = new Mock<ITempDataDictionary>();
+            _addPageModel.TempData = MockTempData.Object;
+
             // Act
             var result = await _addPageModel.OnPostAsync();
 
