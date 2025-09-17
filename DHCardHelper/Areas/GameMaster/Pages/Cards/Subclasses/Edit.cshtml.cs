@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
-namespace DHCardHelper.Areas.GameMaster.Pages.Cards.Subclass
+namespace DHCardHelper.Areas.GameMaster.Pages.Cards.Subclasses
 {
     [Area("GameMaster")]
     public class EditModel : PageModel
