@@ -38,7 +38,7 @@
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item text-dark" asp-area="GameMaster" asp-page="/Cards/Domain/Add">Domain</a></li>
                                 <li><a class="dropdown-item text-dark" asp-area="GameMaster" asp-page="/Cards/Background/Add">Heritage</a></li>
-                                <li><a class="dropdown-item text-dark" asp-area="GameMaster" asp-page="/Cards/Subclasses/Add">Subclass</a></li>
+                                <li><a class="dropdown-item text-dark" asp-area="GameMaster" asp-page="/Cards/Subclass/Add">Subclass</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -62,6 +62,8 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

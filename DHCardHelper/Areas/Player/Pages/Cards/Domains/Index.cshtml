@@ -12,7 +12,7 @@
                 {
                     var color = !string.IsNullOrEmpty(card.Domain.Color) ? card.Domain.Color : "bg-secondary";
                     <div class="col-12 col-sm-6 col-lg-3">
-                        <div class="card h-100">
+                        <div class="card h-100" id="card-@card.Id">
                             <div class="card-header" style="background-color:@color; color:white;">
                                 <div class="row">
                                     <div class="col-10">
@@ -44,7 +44,12 @@
                                         <a asp-area="GameMaster" asp-page="/Cards/Domain/Edit" asp-route-id="@card.Id" class="card-link"><i class="bi bi-pencil-square"></i></a>
                                     </div>
                                     <div class="col-6 text-end">
-                                        <a href="#" class="card-link"><i class="bi bi-trash3"></i></a>
+                                        <form id="hiddenForm" method="post">
+                                            @Html.AntiForgeryToken()
+                                        </form>
+                                        <button id="delete-icon" type="button" class="btn btn-link p-0 border-0" data-id="@card.Id" data-type="Domain">
+                                            <i class="bi bi-trash3"></i>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -55,3 +60,8 @@
         </div>
     </div>
 </div>
+
+@section Scripts
+{
+    <script src="~/js/delete.js"></script>
+}
