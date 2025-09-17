@@ -57,10 +57,20 @@ namespace DHCardHelper.Areas.GameMaster.Pages.Cards.Domain
                 return NotFound();
 
             var domainForeignKeyValid = await this.IsForeignKeyValid(_unitOfWork.DomainRepository, d => d.Id == DomainViewModel.DomainCardDto.DomainId);
-            var typeForeignKeyValid = await this.IsForeignKeyValid(_unitOfWork.DomainCardTypeRepository, t => t.Id == DomainViewModel.DomainCardDto.TypeId);
+            if (!domainForeignKeyValid)
+            {
+                this.AddErrorToModel(() => DomainViewModel.DomainCardDto.DomainId);
 
-            if (!domainForeignKeyValid || !typeForeignKeyValid)
                 return Page();
+            }
+            
+            var typeForeignKeyValid = await this.IsForeignKeyValid(_unitOfWork.DomainCardTypeRepository, t => t.Id == DomainViewModel.DomainCardDto.TypeId);
+            if (!typeForeignKeyValid)
+            {
+                this.AddErrorToModel(() => DomainViewModel.DomainCardDto.TypeId);
+
+                return Page();
+            }
 
             _mapper.Map(DomainViewModel.DomainCardDto, entity);
             await _unitOfWork.SaveAsync();
@@ -89,6 +99,5 @@ namespace DHCardHelper.Areas.GameMaster.Pages.Cards.Domain
                 Selected = t.Id == DomainViewModel.DomainCardDto.TypeId
             });
         }
-
     }
 }

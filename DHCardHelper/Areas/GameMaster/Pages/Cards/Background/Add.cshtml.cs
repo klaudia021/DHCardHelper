@@ -42,6 +42,7 @@ namespace DHCardHelper.Areas.GameMaster.Pages.Cards.Background
             if (!backgroundTypeForeignKeyValid)
             {
                 this.AddErrorToModel(() => BackgroundViewModel.BackgroundCardDto.BackgroundTypeId);
+
                 return Page();
             }
 

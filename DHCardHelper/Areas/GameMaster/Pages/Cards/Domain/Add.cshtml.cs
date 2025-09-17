@@ -38,10 +38,20 @@ namespace DHCardHelper.Areas.GameMaster.Pages.Cards.Domain
                 return Page();
 
             var domainForeignKeyValid = await this.IsForeignKeyValid(_unitOfWork.DomainRepository, d => d.Id == DomainViewModel.DomainCardDto.DomainId);
-            var typeForeignKeyValid = await this.IsForeignKeyValid(_unitOfWork.DomainCardTypeRepository, t => t.Id == DomainViewModel.DomainCardDto.TypeId);
+            if (!domainForeignKeyValid)
+            {
+                this.AddErrorToModel(() => DomainViewModel.DomainCardDto.DomainId);
 
-            if (!domainForeignKeyValid || !typeForeignKeyValid)
                 return Page();
+            }
+
+            var typeForeignKeyValid = await this.IsForeignKeyValid(_unitOfWork.DomainCardTypeRepository, t => t.Id == DomainViewModel.DomainCardDto.TypeId);
+            if (!typeForeignKeyValid)
+            {
+                this.AddErrorToModel(() => DomainViewModel.DomainCardDto.TypeId);
+
+                return Page();
+            }
 
             DomainCard newEntity = _mapper.Map<DomainCard>(DomainViewModel.DomainCardDto);
             await _unitOfWork.CardRepository.AddAsync(newEntity);
