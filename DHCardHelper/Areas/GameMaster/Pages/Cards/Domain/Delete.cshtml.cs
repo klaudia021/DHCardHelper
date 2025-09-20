@@ -1,6 +1,8 @@
-﻿using DHCardHelper.Data.Repository.IRepository;
+﻿using DHCardHelper.Auth;
+using DHCardHelper.Data.Repository.IRepository;
 using DHCardHelper.Models.Entities.Cards;
 using DHCardHelper.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +11,7 @@ namespace DHCardHelper.Areas.GameMaster.Pages.Cards.Domain
 {
     [ValidateAntiForgeryToken]
     [Area("GameMaster")]
+    [Authorize(Roles = $"{RoleNames.Admin},{RoleNames.GameMaster}")]
     public class DeleteModel : PageModel
     {
         private readonly IUnitOfWork _unitOfWork;

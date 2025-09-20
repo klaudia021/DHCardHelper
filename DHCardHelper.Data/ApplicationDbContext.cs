@@ -1,10 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using DHCardHelper.Models.Entities;
 using DHCardHelper.Models.Entities.Cards;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using DHCardHelper.Models.Entities.Users;
 
 namespace DHCardHelper.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<Card> Cards { get; set; }
         public DbSet<Domain> Domains { get; set; }

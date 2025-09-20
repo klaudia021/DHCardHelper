@@ -24,24 +24,31 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Player" asp-page="/Cards/Domains/Index">Domains</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Player" asp-page="/Cards/Subclasses/Index">Subclasses</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Player" asp-page="/Cards/Backgrounds/Index">Heritage</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">Add Card</a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item text-dark" asp-area="GameMaster" asp-page="/Cards/Domain/Add">Domain</a></li>
-                                <li><a class="dropdown-item text-dark" asp-area="GameMaster" asp-page="/Cards/Background/Add">Heritage</a></li>
-                                <li><a class="dropdown-item text-dark" asp-area="GameMaster" asp-page="/Cards/Subclass/Add">Subclass</a></li>
-                            </ul>
-                        </li>
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Player" asp-page="/Cards/Domains/Index">Domains</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Player" asp-page="/Cards/Subclasses/Index">Subclasses</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Player" asp-page="/Cards/Backgrounds/Index">Heritage</a>
+                            </li>
+                        }
+                        @if (User.IsInRole(RoleNames.Admin) || User.IsInRole(RoleNames.GameMaster))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">Add Card</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item text-dark" asp-area="GameMaster" asp-page="/Cards/Domain/Add">Domain</a></li>
+                                    <li><a class="dropdown-item text-dark" asp-area="GameMaster" asp-page="/Cards/Background/Add">Heritage</a></li>
+                                    <li><a class="dropdown-item text-dark" asp-area="GameMaster" asp-page="/Cards/Subclass/Add">Subclass</a></li>
+                                </ul>
+                            </li>
+                        }
                     </ul>
+                    <partial name="_LoginPartial" />
                 </div>
             </div>
         </nav>
