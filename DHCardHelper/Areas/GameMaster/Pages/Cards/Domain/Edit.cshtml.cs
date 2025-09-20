@@ -1,9 +1,11 @@
+using DHCardHelper.Auth;
 using DHCardHelper.Data.Repository.IRepository;
 using DHCardHelper.Models.DTOs;
 using DHCardHelper.Models.Entities.Cards;
 using DHCardHelper.Models.ViewModels;
 using DHCardHelper.Services;
 using MapsterMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -11,6 +13,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 namespace DHCardHelper.Areas.GameMaster.Pages.Cards.Domain
 {
     [Area("GameMaster")]
+    [Authorize(Roles = $"{RoleNames.Admin},{RoleNames.GameMaster}")]
     public class EditModel : PageModel
     {
         private readonly IMyLogger _logger;
