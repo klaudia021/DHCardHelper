@@ -3,6 +3,7 @@ using DHCardHelper.Models.Entities;
 using DHCardHelper.Models.Entities.Cards;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using DHCardHelper.Models.Entities.Users;
+using DHCardHelper.Models.Entities.Characters;
 
 namespace DHCardHelper.Data
 {
@@ -13,6 +14,8 @@ namespace DHCardHelper.Data
         public DbSet<DomainCardType> DomainCardTypes { get; set; }
         public DbSet<CharacterClass> CharacterClasses { get; set; }
         public DbSet<BackgroundCardType> BackgroundCardTypes { get; set; }
+        public DbSet<CharacterSheet> CharacterSheet { get; set; }
+        public DbSet<CardSheet> CardSheet { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
