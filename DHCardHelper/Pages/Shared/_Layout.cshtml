@@ -35,9 +35,25 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="Player" asp-page="/Cards/Backgrounds/Index">Heritage</a>
                             </li>
+                            @if (User.IsInRole(RoleNames.Player))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="Player" asp-page="/Characters/Index">Character Sheets</a>
+                                </li>
+                            }
+                            @if (User.IsInRole(RoleNames.Admin) || User.IsInRole(RoleNames.GameMaster))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="GameMaster" asp-page="/Characters/Index">Character Sheets</a>
+                                </li>
+                            }
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Player" asp-page="/Characters/Add">Add Character</a>
+                            </li>
                         }
                         @if (User.IsInRole(RoleNames.Admin) || User.IsInRole(RoleNames.GameMaster))
                         {
+
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">Add Card</a>
                                 <ul class="dropdown-menu">

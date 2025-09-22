@@ -1,0 +1,27 @@
+﻿@page
+@model DHCardHelper.Areas.Player.Pages.Characters.IndexModel
+<div class="container mt-3 mb-3">
+    <div class="card border-0 my-2">
+        <div class="card-header border-0 bg-white m-lg-0">
+            <h1>Characters</h1>
+        </div>
+        <div class="card-body">
+            <div class="row g-3">
+                @foreach (var sheet in Model.CharacterSheets)
+                {
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <div class="card h-100" id="card-@sheet.Id">
+                            <div class="card-header">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <a asp-area="Player" asp-page="/Characters/Character" asp-route-id="@sheet.Id" class="card-title">@sheet.Name</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

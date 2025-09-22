@@ -1,0 +1,37 @@
+﻿@page
+@model DHCardHelper.Areas.Player.Pages.Characters.AddModel
+
+<div class="container">
+    <div class="card shadow border-0 my-4">
+        <div class="card-header text-center bg-light m-lg-0">
+            <h1>Create Character</h1>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                <div class="row mx-lg-3 my-3">
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <input asp-for="CharacterSheetDto.Name" class="form-control" />
+                            <label asp-for="CharacterSheetDto.Name"></label>
+                            <span asp-validation-for="CharacterSheetDto.Name" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row gy-3 mx-lg-3 my-lg-3">
+                    <div class="col-0 col-md-10"></div>
+                    <div class="col-12 col-md-2 text-end">
+                        <button class="btn btn-dark btn-sm w-100" type="submit">Create</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
+
