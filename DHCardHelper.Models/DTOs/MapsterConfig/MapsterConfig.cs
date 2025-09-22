@@ -1,4 +1,6 @@
-﻿using DHCardHelper.Models.Entities.Cards;
+﻿using DHCardHelper.Models.DTOs.Character;
+using DHCardHelper.Models.Entities.Cards;
+using DHCardHelper.Models.Entities.Characters;
 using Mapster;
 
 namespace DHCardHelper.Models.DTOs.MappingProfile
@@ -52,6 +54,11 @@ namespace DHCardHelper.Models.DTOs.MappingProfile
                 .Map(dest => dest.Feature, src => src.Feature)
                 .Map(dest => dest.CharacterClassId, src => src.CharacterClassId)
                 .Map(dest => dest.MasteryType, src => src.MasteryType);
+
+            TypeAdapterConfig<CharacterSheet, CharacterSheetDto>.NewConfig()
+                .Ignore(dest => dest.UserId)
+                .Map(dest => dest.Id, src => src.Id)
+                .Map(dest => dest.Name, src => src.Name);
         }
     }
 }
