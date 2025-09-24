@@ -10,13 +10,15 @@ namespace DHCardHelper.Models.DTOs.MappingProfile
         public static void Configure()
         {
             TypeAdapterConfig<DomainCard, DomainCardDto>.NewConfig()
-                .Ignore(dest => dest.Id)
+                .Map(dest => dest.Id, src => src.Id)
                 .Map(dest => dest.Title, src => src.Title)
                 .Map(dest => dest.Feature, src => src.Feature)
                 .Map(dest => dest.DomainId, src => src.DomainId)
                 .Map(dest => dest.TypeId, src => src.DomainCardTypeId)
                 .Map(dest => dest.Level, src => src.Level)
-                .Map(dest => dest.RecallCost, src => src.RecallCost);
+                .Map(dest => dest.RecallCost, src => src.RecallCost)
+                .Map(dest => dest.DomainCardType, src => src.DomainCardType)
+                .Map(dest => dest.Domain, src => src.Domain);
 
             TypeAdapterConfig<DomainCardDto, DomainCard>.NewConfig()
                 .Ignore(dest => dest.Id)
@@ -35,30 +37,44 @@ namespace DHCardHelper.Models.DTOs.MappingProfile
                 .Map(dest => dest.BackgroundTypeId, src => src.BackgroundTypeId);
 
             TypeAdapterConfig<BackgroundCard, BackgroundCardDto>.NewConfig()
-                .Ignore(dest => dest.Id)
+                .Map(dest => dest.Id, src => src.Id)
                 .Map(dest => dest.Title, src => src.Title)
                 .Map(dest => dest.Feature, src => src.Feature)
                 .Map(dest => dest.Desciption, src => src.Desciption)
-                .Map(dest => dest.BackgroundTypeId, src => src.BackgroundTypeId);
+                .Map(dest => dest.BackgroundTypeId, src => src.BackgroundTypeId)
+                .Map(dest => dest.BackgroundType, src => src.BackgroundType);
 
             TypeAdapterConfig<SubclassCardDto, SubclassCard>.NewConfig()
                 .Ignore(dest => dest.Id)
                 .Map(dest => dest.Title, src => src.Title)
                 .Map(dest => dest.Feature, src => src.Feature)
+                .Map(dest => dest.CharacterClass, src => src.CharacterClass)
                 .Map(dest => dest.CharacterClassId, src => src.CharacterClassId)
                 .Map(dest => dest.MasteryType, src => src.MasteryType);
 
             TypeAdapterConfig<SubclassCard, SubclassCardDto>.NewConfig()
-                .Ignore(dest => dest.Id)
+                .Map(dest => dest.Id, src => src.Id)
                 .Map(dest => dest.Title, src => src.Title)
                 .Map(dest => dest.Feature, src => src.Feature)
+                .Map(dest => dest.CharacterClass, src => src.CharacterClass)
                 .Map(dest => dest.CharacterClassId, src => src.CharacterClassId)
                 .Map(dest => dest.MasteryType, src => src.MasteryType);
 
             TypeAdapterConfig<CharacterSheet, CharacterSheetDto>.NewConfig()
-                .Ignore(dest => dest.UserId)
+                .Map(dest => dest.Id, src => src.Id)
                 .Map(dest => dest.Id, src => src.Id)
                 .Map(dest => dest.Name, src => src.Name);
+
+            TypeAdapterConfig<CardSheet, CardSheetDto>.NewConfig()
+                .Map(dest => dest.InLoadout, src => src.InLoadout)
+                .Map(dest => dest.InLimit, src => src.InLimit)
+                .Map(dest => dest.CardDto, src => src.Card)
+                .Map(dest => dest.CharacterSheetDto, src => src.CharacterSheet);
+
+            TypeAdapterConfig<Card, CardDto>.NewConfig()
+                .Include<SubclassCard, SubclassCardDto>()
+                .Include<BackgroundCard, BackgroundCardDto>()
+                .Include<DomainCard, DomainCardDto>();
         }
     }
 }

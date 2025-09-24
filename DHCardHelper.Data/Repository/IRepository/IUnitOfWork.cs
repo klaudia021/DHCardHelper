@@ -11,7 +11,7 @@ namespace DHCardHelper.Data.Repository.IRepository
         IRepository<CharacterClass> CharacterClassRepository { get; }
         IRepository<BackgroundCardType> BackgroundCardTypeRepository { get; }
         IRepository<CharacterSheet> CharacterSheetRepository { get; }
-        IRepository<CardSheet> CardSheetRepository { get; }
+        ICardSheetRepository CardSheetRepository { get; }
 
         Task<int> SaveAsync();
     }

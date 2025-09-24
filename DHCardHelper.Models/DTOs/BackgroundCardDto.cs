@@ -1,4 +1,5 @@
-﻿using DHCardHelper.Models.Entities.Cards;
+﻿using DHCardHelper.Models.Entities;
+using DHCardHelper.Models.Entities.Cards;
 using System.ComponentModel.DataAnnotations;
 
 namespace DHCardHelper.Models.DTOs
@@ -11,5 +12,7 @@ namespace DHCardHelper.Models.DTOs
 
         [Required]
         public int BackgroundTypeId { get; set; }
+
+        public BackgroundCardType BackgroundType { get; set; }
     }
 }

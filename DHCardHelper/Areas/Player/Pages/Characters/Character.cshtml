@@ -1,4 +1,84 @@
 ﻿@page "{id:int?}"
+@using DHCardHelper.Models.DTOs
 @model DHCardHelper.Areas.Player.Pages.Characters.CharacterModel
-@{
-}
+
+<div class="container mt-3 mb-3">
+    <div class="card border-0 my-2">
+        <div class="card-header border-0 bg-white m-lg-0">
+            <h1>@Model.CharacterName abilities</h1>
+        </div>
+        <div class="card-body">
+            <div class="row g-3">
+                @foreach (var card in Model.CardSheets)
+                {
+                    var subclassCard = card.CardDto as SubclassCardDto;
+                    var backgroundCard = card.CardDto as BackgroundCardDto;
+                    var domainCard = card.CardDto as DomainCardDto;
+                    var cardBackgroundColor = domainCard?.Domain?.Color ?? "bg-secondary";
+                    var cardTextColor = (domainCard?.Domain != null) ? "white" : "black";
+                   @*  var subclassBackgroundColor = subclassCard; *@
+
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <div class="card h-100" id="card-@card.CardId">
+                            <div class="card-header" style="background-color:@cardBackgroundColor; color:@cardTextColor;">
+                                <div class="row">
+                                    <div class="col-10">
+                                        <h5 class="card-title">@card.CardDto.Title</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body d-flex flex-column">
+                                @if (subclassCard != null)
+                                {
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h5 class="card-subtitle mb-2 text-body-secondary">@subclassCard.CharacterClass.Name</h5>
+                                        </div>
+                                    </div>
+                                }
+
+                                @if (domainCard != null)
+                                {
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <h5 class="card-subtitle mb-2" style="color:@cardBackgroundColor;">@domainCard.Domain.Name</h5>
+                                        </div>
+                                        <div class="col-3 text-end">
+                                            <h6>@domainCard.Level</h6>
+                                        </div>
+                                        <div class="col-3 text-end">
+                                            <h6>@domainCard.RecallCost<i class="bi bi-lightning-charge-fill"></i></h6>
+                                        </div>
+                                    </div>
+                                }
+
+                                @if (backgroundCard != null)
+                                {
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h5 class="card-subtitle mb-2 text-body-secondary">@backgroundCard.BackgroundType.Name</h5>
+                                        </div>
+                                    </div>
+                                }
+
+                                <div class="row">
+                                    @if (subclassCard != null)
+                                    {
+                                        <p class="mb-2 text-body-secondary fst-italic" style="font-size: 1rem">@subclassCard.MasteryType</p>
+                                    }
+
+                                    @if (domainCard != null)
+                                    {
+                                        <h8 class="card-subtitle mb-2 text-body-secondary">@domainCard.DomainCardType.Name</h8>
+                                    }
+
+                                    <p class="card-text">@Html.Raw(@card.CardDto.Feature)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

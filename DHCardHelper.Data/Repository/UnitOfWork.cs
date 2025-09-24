@@ -13,7 +13,7 @@ namespace DHCardHelper.Data.Repository
         private IRepository<DomainCardType>? _domainCardTypeRepository;
         private IRepository<CharacterClass>? _characterClassRepository;
         private IRepository<BackgroundCardType>? _backgroundCardTypeRepository;
-        private IRepository<CardSheet>? _cardSheetRepository;
+        private ICardSheetRepository? _cardSheetRepository;
         private IRepository<CharacterSheet>? _characterSheetRepository;
         public UnitOfWork(ApplicationDbContext db) => _db = db;
 
@@ -23,7 +23,7 @@ namespace DHCardHelper.Data.Repository
         public IRepository<CharacterClass> CharacterClassRepository => _characterClassRepository ??= new Repository<CharacterClass>(_db);
         public IRepository<BackgroundCardType> BackgroundCardTypeRepository => _backgroundCardTypeRepository ??= new Repository<BackgroundCardType>(_db);
         public IRepository<CharacterSheet> CharacterSheetRepository => _characterSheetRepository ??= new Repository<CharacterSheet>(_db);
-        public IRepository<CardSheet> CardSheetRepository => _cardSheetRepository ??= new Repository<CardSheet>(_db);
+        public ICardSheetRepository CardSheetRepository => _cardSheetRepository ??= new CardSheetRepository(_db);
 
 
         public async Task<int> SaveAsync()
