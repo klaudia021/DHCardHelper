@@ -33,6 +33,7 @@ namespace DHCardHelper.Models.DTOs.MappingProfile
 
             TypeAdapterConfig<BackgroundCardDto, BackgroundCard>.NewConfig()
                 .Ignore(dest => dest.Id)
+                .Ignore(dest => dest.BackgroundType)
                 .Map(dest => dest.Title, src => src.Title)
                 .Map(dest => dest.Feature, src => src.Feature)
                 .Map(dest => dest.Desciption, src => src.Desciption)
@@ -48,6 +49,7 @@ namespace DHCardHelper.Models.DTOs.MappingProfile
 
             TypeAdapterConfig<SubclassCardDto, SubclassCard>.NewConfig()
                 .Ignore(dest => dest.Id)
+                .Ignore(dest => dest.CharacterClass)
                 .Map(dest => dest.Title, src => src.Title)
                 .Map(dest => dest.Feature, src => src.Feature)
                 .Map(dest => dest.CharacterClassId, src => src.CharacterClassId)
