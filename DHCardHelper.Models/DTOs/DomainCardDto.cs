@@ -1,5 +1,6 @@
 ﻿using DHCardHelper.Models.Entities;
 using DHCardHelper.Models.Entities.Cards;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -10,11 +11,14 @@ namespace DHCardHelper.Models.DTOs
         [Required]
         public int DomainId { get; set; }
 
+        [ValidateNever]
         public Domain Domain { get; set; }
+
 
         [Required]
         public int TypeId { get; set; }
 
+        [ValidateNever]
         public DomainCardType DomainCardType { get; set; }
 
 
