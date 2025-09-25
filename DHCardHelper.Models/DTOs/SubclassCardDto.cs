@@ -15,6 +15,6 @@ namespace DHCardHelper.Models.DTOs
         public int CharacterClassId { get; set; }
 
         [ValidateNever]
-        public CharacterClass CharacterClass { get; set; }
+        public CharacterClass? CharacterClass { get; set; }
     }
 }

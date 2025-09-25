@@ -15,6 +15,6 @@ namespace DHCardHelper.Models.DTOs
         public int BackgroundTypeId { get; set; }
 
         [ValidateNever]
-        public BackgroundCardType BackgroundType { get; set; }
+        public BackgroundCardType? BackgroundType { get; set; }
     }
 }

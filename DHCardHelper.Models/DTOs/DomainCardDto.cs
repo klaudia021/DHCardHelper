@@ -12,14 +12,14 @@ namespace DHCardHelper.Models.DTOs
         public int DomainId { get; set; }
 
         [ValidateNever]
-        public Domain Domain { get; set; }
+        public Domain? Domain { get; set; }
 
 
         [Required]
         public int TypeId { get; set; }
 
         [ValidateNever]
-        public DomainCardType DomainCardType { get; set; }
+        public DomainCardType? DomainCardType { get; set; }
 
 
         [Range(0, 20)]
