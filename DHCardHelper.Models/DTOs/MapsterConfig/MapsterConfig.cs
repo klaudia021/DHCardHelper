@@ -22,6 +22,8 @@ namespace DHCardHelper.Models.DTOs.MappingProfile
 
             TypeAdapterConfig<DomainCardDto, DomainCard>.NewConfig()
                 .Ignore(dest => dest.Id)
+                .Ignore(dest => dest.Domain)
+                .Ignore(dest => dest.DomainCardType)
                 .Map(dest => dest.Title, src => src.Title)
                 .Map(dest => dest.Feature, src => src.Feature)
                 .Map(dest => dest.DomainId, src => src.DomainId)
@@ -48,7 +50,6 @@ namespace DHCardHelper.Models.DTOs.MappingProfile
                 .Ignore(dest => dest.Id)
                 .Map(dest => dest.Title, src => src.Title)
                 .Map(dest => dest.Feature, src => src.Feature)
-                .Map(dest => dest.CharacterClass, src => src.CharacterClass)
                 .Map(dest => dest.CharacterClassId, src => src.CharacterClassId)
                 .Map(dest => dest.MasteryType, src => src.MasteryType);
 
@@ -61,7 +62,6 @@ namespace DHCardHelper.Models.DTOs.MappingProfile
                 .Map(dest => dest.MasteryType, src => src.MasteryType);
 
             TypeAdapterConfig<CharacterSheet, CharacterSheetDto>.NewConfig()
-                .Map(dest => dest.Id, src => src.Id)
                 .Map(dest => dest.Id, src => src.Id)
                 .Map(dest => dest.Name, src => src.Name);
 
