@@ -7,6 +7,18 @@
             const cardId = btn.dataset.cardid;
             const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
 
+            if (!selectedSheetId) {
+                toastr.error("Character sheet not found!");
+
+                return;
+            }
+
+            if (!cardId) {
+                toastr.error("Card cannot be added!");
+
+                return;
+            }
+
             const response = await fetch(`/Characters/${selectedSheetId}/Cards/${cardId}`, {
                 method: "POST",
                 headers: {
