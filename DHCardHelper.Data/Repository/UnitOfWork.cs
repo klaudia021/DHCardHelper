@@ -1,5 +1,6 @@
 ﻿using DHCardHelper.Data.Repository.IRepository;
 using DHCardHelper.Models.Entities;
+using DHCardHelper.Models.Entities.Characters;
 
 namespace DHCardHelper.Data.Repository
 {
@@ -12,6 +13,8 @@ namespace DHCardHelper.Data.Repository
         private IRepository<DomainCardType>? _domainCardTypeRepository;
         private IRepository<CharacterClass>? _characterClassRepository;
         private IRepository<BackgroundCardType>? _backgroundCardTypeRepository;
+        private ICardSheetRepository? _cardSheetRepository;
+        private IRepository<CharacterSheet>? _characterSheetRepository;
         public UnitOfWork(ApplicationDbContext db) => _db = db;
 
         public ICardRepository CardRepository => _cardRepository ??= new CardRepository(_db);
@@ -19,6 +22,8 @@ namespace DHCardHelper.Data.Repository
         public IRepository<DomainCardType> DomainCardTypeRepository => _domainCardTypeRepository ??= new Repository<DomainCardType>(_db);
         public IRepository<CharacterClass> CharacterClassRepository => _characterClassRepository ??= new Repository<CharacterClass>(_db);
         public IRepository<BackgroundCardType> BackgroundCardTypeRepository => _backgroundCardTypeRepository ??= new Repository<BackgroundCardType>(_db);
+        public IRepository<CharacterSheet> CharacterSheetRepository => _characterSheetRepository ??= new Repository<CharacterSheet>(_db);
+        public ICardSheetRepository CardSheetRepository => _cardSheetRepository ??= new CardSheetRepository(_db);
 
 
         public async Task<int> SaveAsync()

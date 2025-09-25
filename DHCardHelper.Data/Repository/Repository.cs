@@ -34,6 +34,11 @@ namespace DHCardHelper.Data.Repository
             return await _dbSet.Where(filter).FirstOrDefaultAsync();
         }
 
+        public async Task<List<T>> GetListWithFilterAsync(Expression<Func<T, bool>> filter)
+        {
+            return await _dbSet.Where(filter).ToListAsync();
+        }
+
         public void Remove(T entity)
         {
             _dbSet.Remove(entity);

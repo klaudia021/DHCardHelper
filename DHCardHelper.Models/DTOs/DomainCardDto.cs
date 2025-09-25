@@ -1,4 +1,5 @@
-﻿using DHCardHelper.Models.Entities.Cards;
+﻿using DHCardHelper.Models.Entities;
+using DHCardHelper.Models.Entities.Cards;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -9,9 +10,12 @@ namespace DHCardHelper.Models.DTOs
         [Required]
         public int DomainId { get; set; }
 
+        public Domain Domain { get; set; }
 
         [Required]
         public int TypeId { get; set; }
+
+        public DomainCardType DomainCardType { get; set; }
 
 
         [Range(0, 20)]

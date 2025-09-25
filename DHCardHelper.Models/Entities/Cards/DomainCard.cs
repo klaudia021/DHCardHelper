@@ -8,11 +8,11 @@ namespace DHCardHelper.Models.Entities.Cards
     {
         [Range(0,20)]
         [Required]
-        public int Level { get; set; }
+        public int? Level { get; set; }
 
         [Range(0,10)]
         [DisplayName("Recall Cost")]
         [Required]
-        public int RecallCost { get; set; }
+        public int? RecallCost { get; set; }
     }
 }

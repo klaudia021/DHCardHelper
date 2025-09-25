@@ -9,8 +9,14 @@
             <h1>Background Cards</h1>
         </div>
         <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-12 col-sm-4 col-lg-3">
+                    <label>Character</label>
+                    <select asp-items="Model.CardToSheetViewModel.CharacterSheetList" id="character-sheet-list" class="form-select"></select>
+                </div>
+            </div>
             <div class="row g-3">
-                @foreach (var card in Model.BackgroundCards.OrderBy(c => c.Title))
+                @foreach (var card in Model.CardToSheetViewModel.CardList.OrderBy(c => c.Title))
                 {
                     <div class="col-12 col-sm-6 col-lg-3">
                         <div class="card h-100" id="card-@card.Id">
@@ -20,7 +26,7 @@
                                         <h5 class="card-title">@card.Title</h5>
                                     </div>
                                     <div class="col-2">
-                                        <a href="#" class="card-link"><i class="bi bi-plus-circle"></i></a>
+                                        <a href="#" id="add-to-sheet-icon" data-cardid="@card.Id" class="card-link"><i class="bi bi-plus-circle"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -62,4 +68,5 @@
 @section Scripts
 {
     <script src="~/js/delete.js"></script>
+    <script src="~/js/card-sheet.js"></script>
 }
