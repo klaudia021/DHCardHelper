@@ -63,7 +63,7 @@ namespace DHCardHelper.Areas.GameMaster.Pages.Cards.Subclass
             if (entity == null)
                 return NotFound();
 
-            var characterClassForeignKeyIsValid = await this.IsForeignKeyValid(_unitOfWork.CardRepository, c => c.CharacterClassId == SubclassViewModel.SubclassCardDto.CharacterClassId);
+            var characterClassForeignKeyIsValid = await this.IsForeignKeyValid(_unitOfWork.CharacterClassRepository, c => c.Id == SubclassViewModel.SubclassCardDto.CharacterClassId);
             if (!characterClassForeignKeyIsValid)
             {
                 this.AddErrorToModel(() => SubclassViewModel.SubclassCardDto.CharacterClassId);

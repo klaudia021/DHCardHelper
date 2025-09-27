@@ -15,7 +15,7 @@ namespace DHCardHelper.Models.DTOs
         [Required]
         public int CharacterClassId { get; set; }
 
-        public CharacterClass CharacterClass { get; set; }
+        public CharacterClass? CharacterClass { get; set; }
 
         [ValidateNever]
         public GradientColor SubclassHeaderColor { get; set; } 

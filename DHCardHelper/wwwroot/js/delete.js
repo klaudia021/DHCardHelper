@@ -5,7 +5,8 @@
             const type = btn.dataset.type;
             const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
 
-            console.log("token: " + token);
+            if (!id || !type)
+                toastr.error("Card not found!");
 
             const result = await Swal.fire({
                 title: "Are you sure?",
