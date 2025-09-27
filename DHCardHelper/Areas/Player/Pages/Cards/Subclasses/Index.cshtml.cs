@@ -1,6 +1,7 @@
 using DHCardHelper.Data.Repository.IRepository;
 using DHCardHelper.Models.DTOs;
 using DHCardHelper.Models.Entities.Cards;
+using DHCardHelper.Models.Shared;
 using DHCardHelper.Models.ViewModels;
 using DHCardHelper.Services;
 using Mapster;
@@ -28,6 +29,7 @@ namespace DHCardHelper.Pages.Cards.Subclasses
         {
             await SetSubclassCards();
             await SetCharacterSheets();
+            await SetHeaderColor();
         }
 
         private async Task SetCharacterSheets()
@@ -54,6 +56,24 @@ namespace DHCardHelper.Pages.Cards.Subclasses
             var subclassCards = await _unitOfWork.CardRepository.GetAllByTypeAsync<SubclassCard>(s => s.CharacterClass);
 
             CardToSheetViewModel.CardList = subclassCards.Adapt<List<SubclassCardDto>>();
+        }
+
+        private async Task SetHeaderColor()
+        {
+            var domainsToClass = await _unitOfWork.ClassToDomainRelRepository.GetDomainsForClass();
+
+            foreach (var subclassCard in CardToSheetViewModel.CardList)
+            {
+                var characterClass = domainsToClass.FirstOrDefault(c => c.Id == subclassCard.CharacterClassId);
+                if (characterClass != null)
+                {
+                    subclassCard.SubclassHeaderColor = new GradientColor
+                    {
+                        Start = characterClass.Domains?.ElementAtOrDefault(0)?.Color ?? "#ffffff",
+                        End = characterClass.Domains?.ElementAtOrDefault(1)?.Color ?? "#ffffff"
+                    };
+                }
+            }
         }
     }
 }

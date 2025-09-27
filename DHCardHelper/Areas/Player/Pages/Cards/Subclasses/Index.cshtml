@@ -18,13 +18,16 @@
                 {
                     <div class="col-12 col-sm-6 col-lg-3">
                         <div class="card h-100" id="card-@card.Id">
-                            <div class="card-header bg-light">
+                            <div class="card-header" style="background: linear-gradient(45deg, 
+                                @card.SubclassHeaderColor.Start 0%, @card.SubclassHeaderColor.Start 46%, 
+                                @card.SubclassHeaderColor.End 54%, @card.SubclassHeaderColor.End 100%);
+                                color: white;">
                                 <div class="row">
                                     <div class="col-10">
                                         <h5 class="card-title">@card.Title</h5>
                                     </div>
                                     <div class="col-2">
-                                        <a href="#" id="add-to-sheet-icon" data-cardid="@card.Id" class="card-link"><i class="bi bi-plus-circle"></i></a>
+                                        <a href="#" id="add-to-sheet-icon" data-cardid="@card.Id" class="card-link"><i class="bi bi-plus-circle text-light"></i></a>
                                     </div>
                                 </div>
                             </div>
