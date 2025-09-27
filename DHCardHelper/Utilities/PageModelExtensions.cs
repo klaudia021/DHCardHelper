@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Linq.Expressions;
 
-namespace DHCardHelper.Services
+namespace DHCardHelper.Utilities
 {
     public static class PageModelExtensions
     {
