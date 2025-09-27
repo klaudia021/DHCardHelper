@@ -4,6 +4,7 @@ using DHCardHelper.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DHCardHelper.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250927104437_SetCompositePrimaryKey")]
+    partial class SetCompositePrimaryKey
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,7 +39,7 @@ namespace DHCardHelper.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("BackgroundCardTypes", (string)null);
+                    b.ToTable("BackgroundCardTypes");
                 });
 
             modelBuilder.Entity("DHCardHelper.Models.Entities.Cards.Card", b =>
@@ -86,7 +89,7 @@ namespace DHCardHelper.Data.Migrations
 
                     b.HasIndex("DomainId");
 
-                    b.ToTable("Cards", (string)null);
+                    b.ToTable("Cards");
 
                     b.HasDiscriminator<string>("CardType").HasValue("Card");
 
@@ -107,7 +110,7 @@ namespace DHCardHelper.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CharacterClasses", (string)null);
+                    b.ToTable("CharacterClasses");
                 });
 
             modelBuilder.Entity("DHCardHelper.Models.Entities.Characters.CardSheet", b =>
@@ -136,7 +139,7 @@ namespace DHCardHelper.Data.Migrations
 
                     b.HasIndex("CharacterSheetId");
 
-                    b.ToTable("CardSheet", (string)null);
+                    b.ToTable("CardSheet");
                 });
 
             modelBuilder.Entity("DHCardHelper.Models.Entities.Characters.CharacterSheet", b =>
@@ -160,7 +163,7 @@ namespace DHCardHelper.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("CharacterSheet", (string)null);
+                    b.ToTable("CharacterSheet");
                 });
 
             modelBuilder.Entity("DHCardHelper.Models.Entities.Domain", b =>
@@ -181,7 +184,7 @@ namespace DHCardHelper.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Domains", (string)null);
+                    b.ToTable("Domains");
                 });
 
             modelBuilder.Entity("DHCardHelper.Models.Entities.DomainCardType", b =>
@@ -198,7 +201,7 @@ namespace DHCardHelper.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DomainCardTypes", (string)null);
+                    b.ToTable("DomainCardTypes");
                 });
 
             modelBuilder.Entity("DHCardHelper.Models.Entities.Relationships.ClassToDomainRel", b =>
@@ -213,7 +216,7 @@ namespace DHCardHelper.Data.Migrations
 
                     b.HasIndex("DomainId");
 
-                    b.ToTable("ClassToDomainRel", (string)null);
+                    b.ToTable("ClassToDomainRel");
                 });
 
             modelBuilder.Entity("DHCardHelper.Models.Entities.Users.ApplicationUser", b =>

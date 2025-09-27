@@ -56,6 +56,7 @@ namespace DHCardHelper.Models.DTOs.MappingProfile
                 .Map(dest => dest.MasteryType, src => src.MasteryType);
 
             TypeAdapterConfig<SubclassCard, SubclassCardDto>.NewConfig()
+                .Ignore(d => d.SubclassHeaderColor)
                 .Map(dest => dest.Id, src => src.Id)
                 .Map(dest => dest.Title, src => src.Title)
                 .Map(dest => dest.Feature, src => src.Feature)
@@ -68,6 +69,9 @@ namespace DHCardHelper.Models.DTOs.MappingProfile
                 .Map(dest => dest.Name, src => src.Name);
 
             TypeAdapterConfig<CardSheet, CardSheetDto>.NewConfig()
+                .Ignore(cs => cs.CardId)
+                .Ignore(cs => cs.CharacterSheetId)
+                .Ignore(cs => cs.SubclassHeaderColor)
                 .Map(dest => dest.InLoadout, src => src.InLoadout)
                 .Map(dest => dest.InLimit, src => src.InLimit)
                 .Map(dest => dest.CardDto, src => src.Card)

@@ -14,13 +14,17 @@
                     var subclassCard = card.CardDto as SubclassCardDto;
                     var backgroundCard = card.CardDto as BackgroundCardDto;
                     var domainCard = card.CardDto as DomainCardDto;
-                    var cardBackgroundColor = domainCard?.Domain?.Color ?? "bg-secondary";
-                    var cardTextColor = (domainCard?.Domain != null) ? "white" : "black";
-                   @*  var subclassBackgroundColor = subclassCard; *@
+                    var cardBackgroundColor = domainCard?.Domain?.Color;
+
+                    var style = "";
+                    style += (cardBackgroundColor != null) ? $"background-color: {cardBackgroundColor};" : $"background-color: #F8F5F0;";
+                    style += (backgroundCard != null) ? $"color: black;" : "color: white;";
+                    style += (card.SubclassHeaderColor != null) ?
+                    $"background: linear-gradient(45deg, {@card.SubclassHeaderColor.Start} 0%, {@card.SubclassHeaderColor.Start} 46%, {@card.SubclassHeaderColor.End} 54%, {@card.SubclassHeaderColor.End} 100%);" : "";
 
                     <div class="col-12 col-sm-6 col-lg-3">
                         <div class="card h-100" id="card-@card.CardId">
-                            <div class="card-header" style="background-color:@cardBackgroundColor; color:@cardTextColor;">
+                            <div class="card-header" style="@style">
                                 <div class="row">
                                     <div class="col-10">
                                         <h5 class="card-title">@card.CardDto.Title</h5>

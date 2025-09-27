@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using DHCardHelper.Models.Entities.Relationships;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace DHCardHelper.Models.Entities
@@ -14,5 +15,7 @@ namespace DHCardHelper.Models.Entities
         [DisplayName("Color")]
         [Required]
         public string Color { get; set; }
+
+        public ICollection<ClassToDomainRel> ClassToDomainRel { get; set; } = new List<ClassToDomainRel>();
     }
 }
