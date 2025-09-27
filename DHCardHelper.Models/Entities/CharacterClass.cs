@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using DHCardHelper.Models.Entities.Relationships;
+using System.ComponentModel.DataAnnotations;
 
 namespace DHCardHelper.Models.Entities
 {
@@ -9,5 +10,7 @@ namespace DHCardHelper.Models.Entities
 
         [Required]
         public string Name { get; set; }
+
+        public ICollection<ClassToDomainRel> ClassToDomainRel { get; set; } = new List<ClassToDomainRel>();
     }
 }

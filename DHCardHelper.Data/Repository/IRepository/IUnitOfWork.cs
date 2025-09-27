@@ -1,5 +1,6 @@
 ﻿using DHCardHelper.Models.Entities;
 using DHCardHelper.Models.Entities.Characters;
+using DHCardHelper.Models.Entities.Relationships;
 
 namespace DHCardHelper.Data.Repository.IRepository
 {
@@ -11,6 +12,7 @@ namespace DHCardHelper.Data.Repository.IRepository
         IRepository<CharacterClass> CharacterClassRepository { get; }
         IRepository<BackgroundCardType> BackgroundCardTypeRepository { get; }
         IRepository<CharacterSheet> CharacterSheetRepository { get; }
+        IClassToDomainRel ClassToDomainRelRepository { get; }
         ICardSheetRepository CardSheetRepository { get; }
 
         Task<int> SaveAsync();

@@ -4,6 +4,7 @@ using DHCardHelper.Models.Entities.Cards;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using DHCardHelper.Models.Entities.Users;
 using DHCardHelper.Models.Entities.Characters;
+using DHCardHelper.Models.Entities.Relationships;
 
 namespace DHCardHelper.Data
 {
@@ -16,6 +17,7 @@ namespace DHCardHelper.Data
         public DbSet<BackgroundCardType> BackgroundCardTypes { get; set; }
         public DbSet<CharacterSheet> CharacterSheet { get; set; }
         public DbSet<CardSheet> CardSheet { get; set; }
+        public DbSet<ClassToDomainRel> ClassToDomainRel { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
@@ -56,11 +58,6 @@ namespace DHCardHelper.Data
             modelBuilder.Entity<SubclassCard>()
                 .Property(m => m.MasteryType)
                 .HasConversion<string>();
-
-            modelBuilder.Entity<Domain>();
-            modelBuilder.Entity<DomainCardType>();
-            modelBuilder.Entity<CharacterClass>();
-            modelBuilder.Entity<BackgroundCardType>();
 
             base.OnModelCreating(modelBuilder);
         }
