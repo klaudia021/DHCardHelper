@@ -22,12 +22,22 @@
                     style += (card.SubclassHeaderColor != null) ?
                     $"background: linear-gradient(45deg, {@card.SubclassHeaderColor.Start} 0%, {@card.SubclassHeaderColor.Start} 46%, {@card.SubclassHeaderColor.End} 54%, {@card.SubclassHeaderColor.End} 100%);" : "";
 
+                    var trashIconColor = (backgroundCard != null) ? "" : "text-light";
+
                     <div class="col-12 col-sm-6 col-lg-3">
-                        <div class="card h-100" id="card-@card.CardId">
+                        <div class="card h-100" id="card-@card.CardDto.Id">
                             <div class="card-header" style="@style">
                                 <div class="row">
                                     <div class="col-10">
                                         <h5 class="card-title">@card.CardDto.Title</h5>
+                                    </div>
+                                    <div class="col-2 text-end">
+                                            <form id="hiddenForm" method="post">
+                                                @Html.AntiForgeryToken()
+                                            </form>
+                                        <button id="remove-card-icon" type="button" class="btn btn-link p-0 border-0" data-cardid="@card.CardDto.Id" data-charactersheetid="@card.CharacterSheetDto.Id">
+                                            <i class="bi bi-trash3 @trashIconColor"></i>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -86,3 +96,8 @@
         </div>
     </div>
 </div>
+
+@section Scripts
+{
+    <script src="~/js/remove-card-from-sheet.js"></script>
+}
