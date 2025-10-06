@@ -32,9 +32,9 @@
                                         <h5 class="card-title">@card.CardDto.Title</h5>
                                     </div>
                                     <div class="col-2 text-end">
-                                            <form id="hiddenForm" method="post">
-                                                @Html.AntiForgeryToken()
-                                            </form>
+                                        <form id="hiddenForm" method="post">
+                                            @Html.AntiForgeryToken()
+                                        </form>
                                         <button id="remove-card-icon" type="button" class="btn btn-link p-0 border-0" data-cardid="@card.CardDto.Id" data-charactersheetid="@card.CharacterSheetDto.Id">
                                             <i class="bi bi-trash3 @trashIconColor"></i>
                                         </button>
