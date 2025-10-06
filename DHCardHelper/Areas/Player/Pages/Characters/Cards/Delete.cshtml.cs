@@ -1,8 +1,10 @@
 using DHCardHelper.Data.Repository.IRepository;
 using DHCardHelper.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace DHCardHelper.Areas.Player.Pages.Characters.Cards
 {
@@ -28,6 +30,13 @@ namespace DHCardHelper.Areas.Player.Pages.Characters.Cards
             var cardSheetEntity = await _unitOfWork.CardSheetRepository.GetFirstOrDefaultAsync(s => s.CardId == cardId && s.CharacterSheetId == characterSheetId);
             if (cardSheetEntity == null)
                 return new JsonResult(new { success = false, message = "Entity not found by these parameters!" });
+
+            var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var characterOwnerUser = await _unitOfWork.CharacterSheetRepository.GetFirstOrDefaultAsync(c => c.Id == characterSheetId);
+
+            if (characterOwnerUser == null || (currentUserId != characterOwnerUser.UserId))
+                return new JsonResult(new { success = false, message = "You do not have permission to modify this character!" });
+
 
             _unitOfWork.CardSheetRepository.Remove(cardSheetEntity);
 
