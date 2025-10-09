@@ -35,7 +35,7 @@ namespace DHCardHelper.Pages.Cards.Domains
             if (userId.IsNullOrEmpty())
             {
                 TempData["Error"] = "User is not found. Try logging in again!";
-                _logger.Error("User not found in Subclasses Index!");
+                _logger.Error("User not found in Domains Index!");
 
                 return;
             }
