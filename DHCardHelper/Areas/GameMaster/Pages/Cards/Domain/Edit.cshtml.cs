@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace DHCardHelper.Areas.GameMaster.Pages.Cards.Domain
 {
@@ -77,11 +78,26 @@ namespace DHCardHelper.Areas.GameMaster.Pages.Cards.Domain
             }
 
             _mapper.Map(DomainViewModel.DomainCardDto, entity);
-            await _unitOfWork.SaveAsync();
 
-            TempData["Success"] = "Domain card edited successfully!";
+            try
+            {
+                await _unitOfWork.SaveAsync();
+                TempData["Success"] = "Domain card edited successfully!";
 
-            return Redirect("/Player/Cards/Domains/Index");
+                return Redirect("/Player/Cards/Domains/Index");
+            }
+            catch (DbUpdateException ex)
+            {
+                _logger.Error(ex.Message);
+                TempData["Error"] = "Unable to save data. Please check the data.";
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex.Message);
+                TempData["Error"] = "There was a database error. Please try again.";
+            }
+
+            return Page();
         }
 
         private async Task PopulateDropdowns()

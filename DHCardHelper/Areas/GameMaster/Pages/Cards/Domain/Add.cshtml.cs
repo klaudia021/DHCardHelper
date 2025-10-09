@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace DHCardHelper.Areas.GameMaster.Pages.Cards.Domain
@@ -59,12 +60,26 @@ namespace DHCardHelper.Areas.GameMaster.Pages.Cards.Domain
 
             DomainCard newEntity = _mapper.Map<DomainCard>(DomainViewModel.DomainCardDto);
             await _unitOfWork.CardRepository.AddAsync(newEntity);
-            await _unitOfWork.SaveAsync();
 
-            TempData["Success"] = "Domain card added successfully!";
+            try
+            {
+                await _unitOfWork.SaveAsync();
+                TempData["Success"] = "Domain card added successfully!";
 
-            return Redirect("./Add");
+                return Redirect("./Add");
+            }
+            catch (DbUpdateException ex)
+            {
+                _logger.Error(ex.Message);
+                TempData["Error"] = "Unable to save data. Please check the data.";
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex.Message);
+                TempData["Error"] = "There was a database error. Please try again.";
+            }
 
+            return Page();
         }
         private async Task PopulateDropDowns()
         {
