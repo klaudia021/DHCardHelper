@@ -1,14 +1,10 @@
-﻿using System.Runtime.CompilerServices;
-
-namespace DHCardHelper.Services
+﻿namespace DHCardHelper.Services
 {
     public class ConsoleLogger : IMyLogger
     {
         private ILogger<ConsoleLogger> _logger;
-        private readonly IWebHostEnvironment _env;
         public ConsoleLogger(IWebHostEnvironment env, ILogger<ConsoleLogger> logger)
         {
-            _env = env;
             _logger = logger;
         }
         public void Info(string message)

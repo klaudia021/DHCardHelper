@@ -64,16 +64,14 @@ namespace DHCardHelper.Areas.GameMaster.Pages.Cards.Background
             {
                 _logger.Error(ex.Message);
                 TempData["Error"] = "Unable to save data. Please check the data.";
-
-                return Page();
             }
             catch (Exception ex)
             {
                 _logger.Error(ex.Message);
                 TempData["Error"] = "There was a database error. Please try again.";
-
-                return Page();
             }
+
+            return Page();
         }
 
         private async Task PopulateDropDown()

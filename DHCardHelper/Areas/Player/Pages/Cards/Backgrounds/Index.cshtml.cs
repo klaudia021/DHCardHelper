@@ -4,8 +4,6 @@ using DHCardHelper.Models.Entities.Cards;
 using DHCardHelper.Models.ViewModels;
 using DHCardHelper.Services;
 using Mapster;
-using MapsterMapper;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.IdentityModel.Tokens;
@@ -37,7 +35,7 @@ namespace DHCardHelper.Pages.Cards.Backgrounds
             if (userId.IsNullOrEmpty())
             {
                 TempData["Error"] = "User is not found. Try logging in again!";
-                _logger.Error("User not found in Subclasses Index!");
+                _logger.Error("User not found in Backgrounds Index!");
 
                 return;
             }

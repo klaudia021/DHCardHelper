@@ -1,5 +1,4 @@
-﻿using Azure;
-using DHCardHelper.Areas.GameMaster.Pages.Cards.Background;
+﻿using DHCardHelper.Areas.GameMaster.Pages.Cards.Background;
 using DHCardHelper.Data.Repository.IRepository;
 using DHCardHelper.Models.Entities;
 using DHCardHelper.Models.Entities.Cards;

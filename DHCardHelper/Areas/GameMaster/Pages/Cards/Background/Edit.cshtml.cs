@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace DHCardHelper.Areas.GameMaster.Pages.Cards.Background
 {
@@ -70,23 +71,40 @@ namespace DHCardHelper.Areas.GameMaster.Pages.Cards.Background
             }
 
             _mapper.Map(BackgroundViewModel.BackgroundCardDto, entity);
-            await _unitOfWork.SaveAsync();
 
-            TempData["Success"] = "Heritage card edited successfully!";
+            try
+            {
+                await _unitOfWork.SaveAsync();
+                TempData["Success"] = "Heritage card edited successfully!";
 
-            return Redirect("/Player/Cards/Backgrounds/Index");
+                return Redirect("/Player/Cards/Backgrounds/Index");
+            }
+            catch (DbUpdateException ex)
+            {
+                _logger.Error(ex.Message);
+                TempData["Error"] = "Unable to save data. Please check the data.";
+
+                return Page();
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex.Message);
+                TempData["Error"] = "There was a database error. Please try again.";
+            }
+
+            return Page();
         }
 
         private async Task PopulateDropDown()
         {
             var backgroundTypes = await _unitOfWork.BackgroundCardTypeRepository.GetAllAsync();
 
-            BackgroundViewModel.HeritageTypes = backgroundTypes.Select(t => new SelectListItem 
-            { 
+            BackgroundViewModel.HeritageTypes = backgroundTypes.Select(t => new SelectListItem
+            {
                 Value = t.Id.ToString(),
                 Text = t.Name,
                 Selected = t.Id == BackgroundViewModel.BackgroundCardDto.BackgroundTypeId
             });
-        } 
+        }
     }
 }
