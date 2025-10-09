@@ -1,8 +1,6 @@
 ﻿using DHCardHelper.Data.Repository.IRepository;
-using DHCardHelper.Models.Entities.Cards;
 using DHCardHelper.Models.Entities.Characters;
 using Microsoft.EntityFrameworkCore;
-using System.Linq.Expressions;
 
 namespace DHCardHelper.Data.Repository
 {

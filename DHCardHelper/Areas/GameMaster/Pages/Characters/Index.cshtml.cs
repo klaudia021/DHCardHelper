@@ -1,7 +1,6 @@
 using DHCardHelper.Data.Repository.IRepository;
 using DHCardHelper.Models.DTOs.Character;
 using Mapster;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace DHCardHelper.Areas.GameMaster.Pages.Characters

@@ -1,6 +1,5 @@
 ﻿using DHCardHelper.Models.Entities;
 using DHCardHelper.Models.Entities.Characters;
-using DHCardHelper.Models.Entities.Relationships;
 
 namespace DHCardHelper.Data.Repository.IRepository
 {
