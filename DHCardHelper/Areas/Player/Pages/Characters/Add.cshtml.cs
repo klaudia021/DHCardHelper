@@ -23,10 +23,6 @@ namespace DHCardHelper.Areas.Player.Pages.Characters
             _logger = logger;
         }
 
-        public void OnGet()
-        {
-        }
-
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
