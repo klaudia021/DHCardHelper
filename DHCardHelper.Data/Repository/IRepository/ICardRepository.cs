@@ -9,5 +9,7 @@ namespace DHCardHelper.Data.Repository.IRepository
             where TDerived : Card;
         Task<TDerived?> GetFirstOrDefaultAsync<TDerived>(Expression<Func<TDerived, bool>> filter)
             where TDerived : Card;
+
+        Task<bool> AnyByTypeAsync<TDerived>() where TDerived : Card;
     }
 }

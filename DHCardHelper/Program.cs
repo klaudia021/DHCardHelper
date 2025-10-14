@@ -24,6 +24,7 @@ namespace DHCardHelper
             builder.Services.AddScoped<IMyLogger, ConsoleLogger>();
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddScoped<IEmailSender, EmailSender>();
+            builder.Services.AddScoped<DatabaseSeeder>();
 
             builder.Services.AddMapster();
             MapsterConfig.Configure();
@@ -84,6 +85,10 @@ namespace DHCardHelper
                 await SeedAuthentication.CreateAdminIfNotExist(scope.ServiceProvider);
                 await SeedAuthentication.CreateUserIfNotExist(scope.ServiceProvider);
                 await SeedAuthentication.CreateGameMasterIfNotExist(scope.ServiceProvider);
+
+                var seeder = scope.ServiceProvider.GetRequiredService<DatabaseSeeder>();
+
+                await seeder.SeedDatabaseAsync();
             }
 
             app.Run();
