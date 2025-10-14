@@ -155,3 +155,5 @@ src/Razor/benchmarks/Microsoft.AspNetCore.Razor.Microbenchmarks/BenchmarkDotNet.
 src/Razor/benchmarks/testapps/ComponentApp/Components/Pages/Generated.razor
 DHCardHelper/appsettings.json
 DHCardHelper/appsettings.Development.json
+
+.env

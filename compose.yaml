@@ -1,0 +1,28 @@
+services:
+  server:
+    build:
+      context: .
+      target: final
+    ports:
+      - 8000:8080
+    depends_on:
+      - db
+    restart: on-failure
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=${DB_CONNECTION_STRING}
+
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: ${DB_PASSWORD}
+    ports: 
+      - 1433:1433
+    restart: always
+    volumes:
+      - database:/var/opt/mssql
+
+volumes:
+  database:
+
