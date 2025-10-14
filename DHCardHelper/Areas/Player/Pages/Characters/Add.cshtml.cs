@@ -1,7 +1,7 @@
 using DHCardHelper.Data.Repository.IRepository;
 using DHCardHelper.Models.DTOs.Character;
 using DHCardHelper.Models.Entities.Characters;
-using DHCardHelper.Services;
+using DHCardHelper.Utilities.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;

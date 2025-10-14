@@ -1,9 +1,11 @@
-﻿namespace DHCardHelper.Services
+﻿using Microsoft.Extensions.Logging;
+
+namespace DHCardHelper.Utilities.Services
 {
     public class ConsoleLogger : IMyLogger
     {
         private ILogger<ConsoleLogger> _logger;
-        public ConsoleLogger(IWebHostEnvironment env, ILogger<ConsoleLogger> logger)
+        public ConsoleLogger(ILogger<ConsoleLogger> logger)
         {
             _logger = logger;
         }

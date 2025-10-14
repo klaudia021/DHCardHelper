@@ -5,6 +5,8 @@ using DHCardHelper.Data.Repository.IRepository;
 using DHCardHelper.Models.DTOs.MappingProfile;
 using DHCardHelper.Models.Entities.Users;
 using DHCardHelper.Services;
+using DHCardHelper.Utilities.SeedDatabase;
+using DHCardHelper.Utilities.Services;
 using Mapster;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
