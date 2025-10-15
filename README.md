@@ -30,7 +30,7 @@ In the main project folder (where the `.env.example` file is located)
     > Only letters, numbers, and underscores are allowed
 
 ### Local setup (Without Docker Compose)
-In the same folder (where `appsettings.example.json` is located):
+In the `\DHCardHelper` folder, where `appsettings.example.json` is located:
  - Create a new `appsettings.json` file.
  - Copy the contents of `appsettings.example.json` into it.
  - Replace the `ChangeMe!` placeholder with a **strong password** (e.g. Str0ngP4$$w0rd!)
