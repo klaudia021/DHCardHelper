@@ -26,6 +26,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DHCardHelper.Data\DHCardHelper.Data.csproj" />
+    <ProjectReference Include="..\DHCardHelper.Utilities\DHCardHelper.Utilities.csproj" />
     <ProjectReference Include="..\DHCardHelper\DHCardHelper.csproj" />
   </ItemGroup>
 

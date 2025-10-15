@@ -5,6 +5,8 @@ using DHCardHelper.Data.Repository.IRepository;
 using DHCardHelper.Models.DTOs.MappingProfile;
 using DHCardHelper.Models.Entities.Users;
 using DHCardHelper.Services;
+using DHCardHelper.Utilities.SeedDatabase;
+using DHCardHelper.Utilities.Services;
 using Mapster;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -22,6 +24,7 @@ namespace DHCardHelper
             builder.Services.AddScoped<IMyLogger, ConsoleLogger>();
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddScoped<IEmailSender, EmailSender>();
+            builder.Services.AddScoped<DatabaseSeeder>();
 
             builder.Services.AddMapster();
             MapsterConfig.Configure();
@@ -82,6 +85,10 @@ namespace DHCardHelper
                 await SeedAuthentication.CreateAdminIfNotExist(scope.ServiceProvider);
                 await SeedAuthentication.CreateUserIfNotExist(scope.ServiceProvider);
                 await SeedAuthentication.CreateGameMasterIfNotExist(scope.ServiceProvider);
+
+                var seeder = scope.ServiceProvider.GetRequiredService<DatabaseSeeder>();
+
+                await seeder.SeedDatabaseAsync();
             }
 
             app.Run();

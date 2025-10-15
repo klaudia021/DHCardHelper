@@ -3,7 +3,7 @@ using DHCardHelper.Data.Repository.IRepository;
 using DHCardHelper.Models.Entities;
 using DHCardHelper.Models.Entities.Cards;
 using DHCardHelper.Models.ViewModels;
-using DHCardHelper.Services;
+using DHCardHelper.Utilities.Services;
 using MapsterMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;

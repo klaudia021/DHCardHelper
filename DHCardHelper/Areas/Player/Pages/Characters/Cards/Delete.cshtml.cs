@@ -1,6 +1,5 @@
 using DHCardHelper.Data.Repository.IRepository;
-using DHCardHelper.Services;
-using Microsoft.AspNetCore.Identity;
+using DHCardHelper.Utilities.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;

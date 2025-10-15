@@ -1,4 +1,4 @@
-﻿namespace DHCardHelper.Services
+﻿namespace DHCardHelper.Utilities.Services
 {
     public interface IMyLogger
     {

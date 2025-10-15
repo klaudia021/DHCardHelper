@@ -1,7 +1,7 @@
 ﻿using DHCardHelper.Auth;
 using DHCardHelper.Data.Repository.IRepository;
 using DHCardHelper.Models.Entities.Cards;
-using DHCardHelper.Services;
+using DHCardHelper.Utilities.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;

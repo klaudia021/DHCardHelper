@@ -8,6 +8,7 @@ namespace DHCardHelper.Data.Repository.IRepository
         Task<T?> GetFirstOrDefaultAsync(Expression<Func<T, bool>> filter);
         Task AddAsync(T entity);
         Task<bool> AnyAsync(Expression<Func<T, bool>> filter);
+        Task<bool> AnyAsync();
         Task<List<T>> GetListWithFilterAsync(Expression<Func<T, bool>> filter);
         void Remove(T entity);
         void RemoveRange(IEnumerable<T> entities);

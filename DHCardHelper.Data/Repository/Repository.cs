@@ -24,6 +24,11 @@ namespace DHCardHelper.Data.Repository
             return await _dbSet.AnyAsync(filter);
         }
 
+        public async Task<bool> AnyAsync()
+        {
+            return await _dbSet.AnyAsync();
+        }
+
         public async Task<IEnumerable<T>> GetAllAsync()
         {
             return await _dbSet.ToListAsync();
