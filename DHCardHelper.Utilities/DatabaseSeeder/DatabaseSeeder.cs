@@ -1,9 +1,12 @@
 ﻿using DHCardHelper.Data.Repository.IRepository;
 using DHCardHelper.Models.Entities;
 using DHCardHelper.Models.Entities.Cards;
+using DHCardHelper.Models.Entities.Characters;
 using DHCardHelper.Models.Entities.Relationships;
+using DHCardHelper.Models.Entities.Users;
 using DHCardHelper.Models.Types;
 using DHCardHelper.Utilities.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace DHCardHelper.Utilities.SeedDatabase
@@ -12,11 +15,13 @@ namespace DHCardHelper.Utilities.SeedDatabase
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMyLogger _logger;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public DatabaseSeeder(IUnitOfWork unitOfWork, IMyLogger logger)
+        public DatabaseSeeder(IUnitOfWork unitOfWork, IMyLogger logger, UserManager<ApplicationUser> userManager)
         {
             _unitOfWork = unitOfWork;
             _logger = logger;
+            _userManager = userManager;
 
         }
         public async Task SeedDatabaseAsync()
@@ -40,10 +45,13 @@ namespace DHCardHelper.Utilities.SeedDatabase
                 await seedSubclassCards();
 
             if (!await _unitOfWork.CardRepository.AnyByTypeAsync<BackgroundCard>())
-                await seedBackgrounds();
+                await seedBackgroundCards();
 
             if (!await _unitOfWork.ClassToDomainRelRepository.AnyAsync())
                 await seedClassDomainRels();
+
+            if (!await _unitOfWork.CharacterSheetRepository.AnyAsync())
+                await seedCharacterAndCardSheet();
         }
 
         private async Task seedBackgroundCardTypes()
@@ -57,11 +65,11 @@ namespace DHCardHelper.Utilities.SeedDatabase
             }
             catch (DbUpdateException ex)
             {
-                _logger.Error($"Saving failed when seeding CharacterClasses - {ex.Message}");
+                _logger.Error($"Saving failed when seeding BackgroundCardTypes - {ex.Message}");
             }
             catch (Exception ex)
             {
-                _logger.Error($"An unexpected error occured when seeding CharacterClasses - {ex.Message}");
+                _logger.Error($"An unexpected error occured when seeding BackgroundCardTypes - {ex.Message}");
             }
         }
 
@@ -250,7 +258,7 @@ namespace DHCardHelper.Utilities.SeedDatabase
             }
         }
 
-        private async Task seedBackgrounds()
+        private async Task seedBackgroundCards()
         {
             await _unitOfWork.CardRepository.AddAsync(new BackgroundCard { Title = "Human", Desciption = "Adaptable and ambitious, humans are known for their ingenuity and resilience.", Feature = "Versatile Spirit – Gain a small bonus to any skill of your choice.", BackgroundTypeId = 1});
             await _unitOfWork.CardRepository.AddAsync(new BackgroundCard { Title = "Elf", Desciption = "Graceful beings attuned to nature and magic, elves live long lives of learning and balance.", Feature = "Arcane Affinity – Reduces mana cost of all spells slightly.", BackgroundTypeId = 1});
@@ -307,12 +315,58 @@ namespace DHCardHelper.Utilities.SeedDatabase
             }
             catch (DbUpdateException ex)
             {
-                _logger.Error($"Saving failed when seeding CharacterClasses - {ex.Message}");
+                _logger.Error($"Saving failed when seeding ClassToDomainRel - {ex.Message}");
             }
             catch (Exception ex)
             {
-                _logger.Error($"An unexpected error occured when seeding CharacterClasses - {ex.Message}");
+                _logger.Error($"An unexpected error occured when seeding ClassToDomainRel - {ex.Message}");
             }
         }
+
+        private async Task seedCharacterAndCardSheet()
+        {
+            var player = _userManager.Users.FirstOrDefault(u => u.Email == "player@player.com");
+
+            if (player == null)
+            {
+                _logger.Error("Player not found! Cannot create characters!");
+                return;
+            }
+
+            var characterYanric = new CharacterSheet { Name = "Yanric Neryl", User = player };
+            var characterZargothrax = new CharacterSheet { Name = "Zargothrax", User = player };
+
+            await _unitOfWork.CardSheetRepository.AddAsync( new CardSheet { CharacterSheet = characterYanric, CardId = 2, InLimit = false, InLoadout = false });
+            await _unitOfWork.CardSheetRepository.AddAsync( new CardSheet { CharacterSheet = characterYanric, CardId = 5, InLimit = false, InLoadout = false });
+            await _unitOfWork.CardSheetRepository.AddAsync( new CardSheet { CharacterSheet = characterYanric, CardId = 26, InLimit = false, InLoadout = false });
+            await _unitOfWork.CardSheetRepository.AddAsync( new CardSheet { CharacterSheet = characterYanric, CardId = 29, InLimit = false, InLoadout = false });
+            await _unitOfWork.CardSheetRepository.AddAsync( new CardSheet { CharacterSheet = characterYanric, CardId = 49, InLimit = false, InLoadout = false });
+            await _unitOfWork.CardSheetRepository.AddAsync( new CardSheet { CharacterSheet = characterYanric, CardId = 50, InLimit = false, InLoadout = false });
+            await _unitOfWork.CardSheetRepository.AddAsync( new CardSheet { CharacterSheet = characterYanric, CardId = 74, InLimit = false, InLoadout = false });
+            await _unitOfWork.CardSheetRepository.AddAsync( new CardSheet { CharacterSheet = characterYanric, CardId = 81, InLimit = false, InLoadout = false });
+
+            await _unitOfWork.CardSheetRepository.AddAsync( new CardSheet { CharacterSheet = characterZargothrax, CardId = 7, InLimit = false, InLoadout = false });
+            await _unitOfWork.CardSheetRepository.AddAsync( new CardSheet { CharacterSheet = characterZargothrax, CardId = 9, InLimit = false, InLoadout = false });
+            await _unitOfWork.CardSheetRepository.AddAsync( new CardSheet { CharacterSheet = characterZargothrax, CardId = 22, InLimit = false, InLoadout = false });
+            await _unitOfWork.CardSheetRepository.AddAsync( new CardSheet { CharacterSheet = characterZargothrax, CardId = 25, InLimit = false, InLoadout = false });
+            await _unitOfWork.CardSheetRepository.AddAsync( new CardSheet { CharacterSheet = characterZargothrax, CardId = 46, InLimit = false, InLoadout = false });
+            await _unitOfWork.CardSheetRepository.AddAsync( new CardSheet { CharacterSheet = characterZargothrax, CardId = 47, InLimit = false, InLoadout = false });
+            await _unitOfWork.CardSheetRepository.AddAsync( new CardSheet { CharacterSheet = characterZargothrax, CardId = 73, InLimit = false, InLoadout = false });
+            await _unitOfWork.CardSheetRepository.AddAsync( new CardSheet { CharacterSheet = characterZargothrax, CardId = 80, InLimit = false, InLoadout = false });
+
+            try
+            {
+                await _unitOfWork.SaveAsync();
+            }
+            catch (DbUpdateException ex)
+            {
+                _logger.Error($"Saving failed when seeding CharacterAndCardSheets - {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                _logger.Error($"An unexpected error occured when seeding CharacterAndCardSheets - {ex.Message}");
+            }
+        }
+
     }
 }
