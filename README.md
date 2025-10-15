@@ -3,7 +3,8 @@ A web application for managing and tracking characters and their abilities for t
 
 ## Technologies Used
 - ASP.NET Core (Razor Pages)
-- Entity Framework Core & Identity
+- Entity Framework Core
+- ASP.NET Core Identity
 - SQL Server
 - Docker & Docker Compose
 - C#
