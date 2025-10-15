@@ -43,9 +43,10 @@ In the `\DHCardHelper` folder, where `appsettings.example.json` is located:
 ```
 docker compose up --build
 ```
+_This process could take a while._
+
 Once the container is running, the application will be available at:
 http://localhost:8000/
-_This process could take a while._
 
 To shut down the container:
 ```
