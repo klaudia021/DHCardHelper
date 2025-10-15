@@ -45,6 +45,7 @@ docker compose up --build
 ```
 Once the container is running, the application will be available at:
 http://localhost:8000/
+_This process could take a while._
 
 To shut down the container:
 ```
