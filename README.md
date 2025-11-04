@@ -29,15 +29,6 @@ In the main project folder (where the `.env.example` file is located)
  - _(Optional) Change the database name (`MyDatabase`) to a custom one._
     > Only letters, numbers, and underscores are allowed
 
-### Local setup (Without Docker Compose)
-In the `\DHCardHelper` folder, where `appsettings.example.json` is located:
- - Create a new `appsettings.json` file.
- - Copy the contents of `appsettings.example.json` into it.
- - Replace the `ChangeMe!` placeholder with a **strong password** (e.g. Str0ngP4$$w0rd!)
- - _(Optional) Change the database name (`MyDatabase`) to a custom one._
-    > Only letters, numbers, and underscores are allowed
- - **If using the local setup with the Docker SQL Server, ensure that the password and database name in both files match exactly!**
-
 ### Build and run container
 - In the main project folder (where the `Dockerfile` file is located):
 ```
@@ -59,6 +50,15 @@ This will delete the SQL data volume!
 docker compose down -v
 ```
 
+### Local setup (Without Docker Compose)
+In the `\DHCardHelper` folder, where `appsettings.example.json` is located:
+ - Create a new `appsettings.json` file.
+ - Copy the contents of `appsettings.example.json` into it.
+ - Replace the `ChangeMe!` placeholder with a **strong password** (e.g. Str0ngP4$$w0rd!)
+ - _(Optional) Change the database name (`MyDatabase`) to a custom one._
+    > Only letters, numbers, and underscores are allowed
+ - **If using the local setup with the Docker SQL Server, ensure that the password and database name in both files match exactly!**
+
 ## How to use
 Login with a predefined user, or create a new account.
 ### Roles
@@ -72,6 +72,14 @@ Login with a predefined user, or create a new account.
     - Currently the same as GameMaster
 
 ### Menus
-  - Domain Cards - Lists the Domain type Cards
-  - Subclass Cards - Lists the Subclass type Cards
-  - Heritage Cards - Lists the Heritage type Cards
+#### Players
+  - Domains - Lists the Domain type Cards
+  - Subclasses - Lists the Subclass type Cards
+  - Heritage - Lists the Heritage type Cards
+  - Character Sheets - Lists the player's characters
+  - Add Character - Create a new character
+
+#### GM and Admins:
+  - 'Domains', 'Subclasses', 'Heritage' and 'Add Character' menus are the same
+  - Character Sheets - Lists all player's characters
+  - Add Card (Domain, Heritage, Subclass) - Create new Cards
